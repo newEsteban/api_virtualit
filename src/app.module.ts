@@ -16,7 +16,6 @@ import { TipoModule } from './tipo/tipo.module';
 import { ArchivoModule } from './archivo/archivo.module';
 import { TicketModule } from './ticket/ticket.module';
 import { ComentarioModule } from './comentario/comentario.module';
-import { NewSistemasModule } from './new_sistemas/new_sistemas.module';
 import { ExternalModule } from './external/external.module';
 import { CommandsModule } from './commands/commands.module';
 
@@ -26,10 +25,10 @@ import { CommandsModule } from './commands/commands.module';
  * Configura e importa todos los módulos necesarios:
  * - Configuración de variables de entorno
  * - Conexión a base de datos principal con TypeORM
- * - Conexión de solo lectura a new_sistemas
+ * - Conexión de solo lectura a external systems
  * - Módulos de funcionalidad (User, Rol, Permiso, etc.)
  * - Módulo común con sistema de permisos
- * - Módulo new_sistemas para acceso a BD legacy
+ * - Módulo external para migración de datos externos
  * - Módulo de comandos CLI
  */
 
@@ -67,7 +66,6 @@ import { CommandsModule } from './commands/commands.module';
     ArchivoModule,
     TicketModule,
     ComentarioModule,
-    NewSistemasModule, // Módulo para recursos de new_sistemas
     ExternalModule, // Módulo para migración de datos externos
     CommandsModule, // Módulo para comandos CLI
   ],
