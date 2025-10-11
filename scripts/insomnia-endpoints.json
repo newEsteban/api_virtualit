@@ -1,0 +1,672 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-28T21:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_virtualit_api",
+      "_type": "workspace",
+      "name": "VirtualIT API - Sistema de Permisos",
+      "description": "API completa del sistema de permisos con usuarios, roles y permisos. Incluye autenticación JWT optimizada con logout.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "name": "Base Environment",
+      "parentId": "wrk_virtualit_api",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "api_prefix": "api",
+        "jwt_token": ""
+      }
+    },
+    {
+      "_id": "env_dev",
+      "_type": "environment",
+      "name": "Development",
+      "parentId": "env_base",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "api_prefix": "api",
+        "jwt_token": ""
+      }
+    },
+    {
+      "_id": "fld_app",
+      "_type": "request_group",
+      "parentId": "wrk_virtualit_api",
+      "name": "🏠 App General",
+      "description": "Endpoints generales de la aplicación"
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_virtualit_api",
+      "name": "🔐 Autenticación",
+      "description": "Login, logout, verificación JWT y gestión de tokens"
+    },
+    {
+      "_id": "fld_users",
+      "_type": "request_group",
+      "parentId": "wrk_virtualit_api",
+      "name": "👥 Usuarios",
+      "description": "Gestión de usuarios del sistema"
+    },
+    {
+      "_id": "fld_roles",
+      "_type": "request_group",
+      "parentId": "wrk_virtualit_api",
+      "name": "🎭 Roles",
+      "description": "Gestión de roles del sistema"
+    },
+    {
+      "_id": "fld_permisos",
+      "_type": "request_group",
+      "parentId": "wrk_virtualit_api",
+      "name": "🔒 Permisos",
+      "description": "Gestión de permisos del sistema"
+    },
+    {
+      "_id": "req_app_hello",
+      "_type": "request",
+      "parentId": "fld_app",
+      "name": "Health Check",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "description": "Endpoint básico para verificar que la API está funcionando"
+    },
+    {
+      "_id": "req_auth_login",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "🔑 Login Usuario",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/auth/login",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@virtualit.com\",\n  \"password\": \"Admin123!\"\n}"
+      },
+      "description": "Login con email y contraseña. INVALIDA TOKENS ANTERIORES automáticamente. Solo un token activo por usuario.",
+      "tests": [
+        {
+          "name": "Save JWT Token",
+          "code": "const response = insomnia.response.json();\nif (response && response.access_token) {\n  await insomnia.environment.set('jwt_token', response.access_token);\n  console.log('Token JWT guardado automáticamente');\n}"
+        }
+      ]
+    },
+    {
+      "_id": "req_auth_verify",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "✅ Verificar Token",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/auth/verify",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Verificar si el token JWT es válido y obtener estado de autenticación"
+    },
+    {
+      "_id": "req_auth_profile",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "👤 Obtener Perfil",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/auth/profile",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener perfil completo del usuario autenticado con roles y permisos"
+    },
+    {
+      "_id": "req_auth_permissions",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "🔐 Verificar Permisos",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/auth/permissions",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener lista detallada de permisos del usuario autenticado"
+    },
+    {
+      "_id": "req_auth_logout",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "🚪 Logout (Cerrar Sesión)",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/auth/logout",
+      "method": "POST",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Cerrar sesión del usuario invalidando el token JWT actual",
+      "tests": [
+        {
+          "name": "Clear JWT Token",
+          "code": "if (insomnia.response.status === 200) {\n  await insomnia.environment.set('jwt_token', '');\n  console.log('Token JWT eliminado después del logout');\n}"
+        }
+      ]
+    },
+    {
+      "_id": "req_auth_logout_all",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "🚪🚪 Logout All (Cerrar Todas)",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/auth/logout-all",
+      "method": "POST",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Cerrar TODAS las sesiones del usuario invalidando todos sus tokens activos",
+      "tests": [
+        {
+          "name": "Clear JWT Token",
+          "code": "if (insomnia.response.status === 200) {\n  await insomnia.environment.set('jwt_token', '');\n  console.log('Token JWT eliminado después del logout completo');\n}"
+        }
+      ]
+    },
+    {
+      "_id": "req_auth_token_status",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "📊 Estado del Token",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/auth/token-status",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Verificar estado detallado del token JWT con estadísticas del sistema de blacklist"
+    },
+    {
+      "_id": "req_users_create",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "➕ Crear Usuario",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/users",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"nuevo@virtualit.com\",\n  \"password\": \"Password123!\",\n  \"name\": \"Usuario Nuevo\",\n  \"rolIds\": [2]\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Crear un nuevo usuario en el sistema"
+    },
+    {
+      "_id": "req_users_list",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "📋 Listar Usuarios",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/users",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener lista de todos los usuarios activos con sus roles"
+    },
+    {
+      "_id": "req_users_get",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "👤 Obtener Usuario por ID",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/users/{{ user_id }}",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener información detallada de un usuario específico",
+      "parameters": [
+        {
+          "name": "user_id",
+          "value": "user-uuid-here",
+          "description": "UUID del usuario"
+        }
+      ]
+    },
+    {
+      "_id": "req_users_permissions",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "🔐 Permisos del Usuario",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/users/{{ user_id }}/permissions",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener todos los permisos de un usuario específico",
+      "parameters": [
+        {
+          "name": "user_id",
+          "value": "user-uuid-here",
+          "description": "UUID del usuario"
+        }
+      ]
+    },
+    {
+      "_id": "req_users_update",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "✏️ Actualizar Usuario",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/users/{{ user_id }}",
+      "method": "PUT",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Nombre Actualizado\",\n  \"email\": \"actualizado@virtualit.com\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Actualizar información de un usuario existente",
+      "parameters": [
+        {
+          "name": "user_id",
+          "value": "user-uuid-here",
+          "description": "UUID del usuario"
+        }
+      ]
+    },
+    {
+      "_id": "req_users_assign_roles",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "🎭 Asignar Roles",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/users/{{ user_id }}/roles",
+      "method": "PATCH",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"roleIds\": [1, 2, 3]\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Asignar roles específicos a un usuario",
+      "parameters": [
+        {
+          "name": "user_id",
+          "value": "user-uuid-here",
+          "description": "UUID del usuario"
+        }
+      ]
+    },
+    {
+      "_id": "req_users_remove_roles",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "🗑️ Remover Roles",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/users/{{ user_id }}/roles",
+      "method": "DELETE",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Remover todos los roles de un usuario",
+      "parameters": [
+        {
+          "name": "user_id",
+          "value": "user-uuid-here",
+          "description": "UUID del usuario"
+        }
+      ]
+    },
+    {
+      "_id": "req_users_delete",
+      "_type": "request",
+      "parentId": "fld_users",
+      "name": "❌ Eliminar Usuario",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/users/{{ user_id }}",
+      "method": "DELETE",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Eliminar un usuario del sistema (soft delete)",
+      "parameters": [
+        {
+          "name": "user_id",
+          "value": "user-uuid-here",
+          "description": "UUID del usuario"
+        }
+      ]
+    },
+    {
+      "_id": "req_roles_create",
+      "_type": "request",
+      "parentId": "fld_roles",
+      "name": "➕ Crear Rol",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/roles",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"moderator\",\n  \"description\": \"Rol de moderador con permisos limitados\",\n  \"priority\": 10,\n  \"permisoIds\": [1, 2, 5]\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Crear un nuevo rol en el sistema"
+    },
+    {
+      "_id": "req_roles_list",
+      "_type": "request",
+      "parentId": "fld_roles",
+      "name": "📋 Listar Roles",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/roles",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener lista de todos los roles con sus permisos"
+    },
+    {
+      "_id": "req_roles_get",
+      "_type": "request",
+      "parentId": "fld_roles",
+      "name": "🎭 Obtener Rol por ID",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/roles/{{ role_id }}",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener información detallada de un rol específico",
+      "parameters": [
+        {
+          "name": "role_id",
+          "value": "1",
+          "description": "ID numérico del rol"
+        }
+      ]
+    },
+    {
+      "_id": "req_roles_update",
+      "_type": "request",
+      "parentId": "fld_roles",
+      "name": "✏️ Actualizar Rol",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/roles/{{ role_id }}",
+      "method": "PUT",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"super_moderator\",\n  \"description\": \"Rol de súper moderador actualizado\",\n  \"priority\": 5\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Actualizar información de un rol existente",
+      "parameters": [
+        {
+          "name": "role_id",
+          "value": "1",
+          "description": "ID numérico del rol"
+        }
+      ]
+    },
+    {
+      "_id": "req_roles_assign_permissions",
+      "_type": "request",
+      "parentId": "fld_roles",
+      "name": "🔐 Asignar Permisos",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/roles/{{ role_id }}/permisos",
+      "method": "PATCH",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"permisoIds\": [1, 2, 3, 4, 5]\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Asignar permisos específicos a un rol",
+      "parameters": [
+        {
+          "name": "role_id",
+          "value": "1",
+          "description": "ID numérico del rol"
+        }
+      ]
+    },
+    {
+      "_id": "req_roles_remove_permissions",
+      "_type": "request",
+      "parentId": "fld_roles",
+      "name": "🗑️ Remover Permisos",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/roles/{{ role_id }}/permisos",
+      "method": "DELETE",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Remover todos los permisos de un rol",
+      "parameters": [
+        {
+          "name": "role_id",
+          "value": "1",
+          "description": "ID numérico del rol"
+        }
+      ]
+    },
+    {
+      "_id": "req_roles_delete",
+      "_type": "request",
+      "parentId": "fld_roles",
+      "name": "❌ Eliminar Rol",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/roles/{{ role_id }}",
+      "method": "DELETE",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Eliminar un rol del sistema",
+      "parameters": [
+        {
+          "name": "role_id",
+          "value": "1",
+          "description": "ID numérico del rol"
+        }
+      ]
+    },
+    {
+      "_id": "req_permisos_create",
+      "_type": "request",
+      "parentId": "fld_permisos",
+      "name": "➕ Crear Permiso",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/permisos",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"posts:publish\",\n  \"description\": \"Permiso para publicar posts\",\n  \"resource\": \"posts\",\n  \"action\": \"publish\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Crear un nuevo permiso en el sistema"
+    },
+    {
+      "_id": "req_permisos_list",
+      "_type": "request",
+      "parentId": "fld_permisos",
+      "name": "📋 Listar Permisos",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/permisos",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener lista de todos los permisos disponibles"
+    },
+    {
+      "_id": "req_permisos_get",
+      "_type": "request",
+      "parentId": "fld_permisos",
+      "name": "🔒 Obtener Permiso por ID",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/permisos/{{ permiso_id }}",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener información detallada de un permiso específico",
+      "parameters": [
+        {
+          "name": "permiso_id",
+          "value": "1",
+          "description": "ID numérico del permiso"
+        }
+      ]
+    },
+    {
+      "_id": "req_permisos_update",
+      "_type": "request",
+      "parentId": "fld_permisos",
+      "name": "✏️ Actualizar Permiso",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/permisos/{{ permiso_id }}",
+      "method": "PUT",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"posts:moderate\",\n  \"description\": \"Permiso actualizado para moderar posts\",\n  \"resource\": \"posts\",\n  \"action\": \"moderate\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Actualizar información de un permiso existente",
+      "parameters": [
+        {
+          "name": "permiso_id",
+          "value": "1",
+          "description": "ID numérico del permiso"
+        }
+      ]
+    },
+    {
+      "_id": "req_permisos_delete",
+      "_type": "request",
+      "parentId": "fld_permisos",
+      "name": "❌ Eliminar Permiso",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/permisos/{{ permiso_id }}",
+      "method": "DELETE",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Eliminar un permiso del sistema",
+      "parameters": [
+        {
+          "name": "permiso_id",
+          "value": "1",
+          "description": "ID numérico del permiso"
+        }
+      ]
+    }
+  ]
+}

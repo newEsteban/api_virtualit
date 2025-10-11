@@ -1,0 +1,504 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-30T21:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_virtualit_modules",
+      "_type": "workspace",
+      "name": "VirtualIT API - Módulos (Tipo, Subtipo, Archivo)",
+      "description": "API de módulos complementarios: Tipos, Subtipos y Archivos polimórficos. Todos los endpoints requieren autenticación JWT y permisos específicos.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "name": "Base Environment",
+      "parentId": "wrk_virtualit_modules",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "api_prefix": "api",
+        "jwt_token": "",
+        "tipo_id": "1",
+        "subtipo_id": "1",
+        "archivo_id": "1"
+      }
+    },
+    {
+      "_id": "env_dev",
+      "_type": "environment",
+      "name": "Development",
+      "parentId": "env_base",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "api_prefix": "api",
+        "jwt_token": "",
+        "tipo_id": "1",
+        "subtipo_id": "1",
+        "archivo_id": "1"
+      }
+    },
+    {
+      "_id": "fld_tipos",
+      "_type": "request_group",
+      "parentId": "wrk_virtualit_modules",
+      "name": "📁 Tipos",
+      "description": "Gestión de tipos del sistema. Un tipo puede tener múltiples subtipos."
+    },
+    {
+      "_id": "fld_subtipos",
+      "_type": "request_group",
+      "parentId": "wrk_virtualit_modules",
+      "name": "📂 Subtipos",
+      "description": "Gestión de subtipos del sistema. Cada subtipo pertenece a un tipo."
+    },
+    {
+      "_id": "fld_archivos",
+      "_type": "request_group",
+      "parentId": "wrk_virtualit_modules",
+      "name": "📎 Archivos",
+      "description": "Gestión de archivos polimórficos. Los archivos pueden asociarse a cualquier recurso del sistema."
+    },
+    {
+      "_id": "req_tipos_create",
+      "_type": "request",
+      "parentId": "fld_tipos",
+      "name": "➕ Crear Tipo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/tipos",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Documentos\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Crear un nuevo tipo en el sistema. Requiere permiso: tipo:create"
+    },
+    {
+      "_id": "req_tipos_list",
+      "_type": "request",
+      "parentId": "fld_tipos",
+      "name": "📋 Listar Tipos",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/tipos",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener lista de todos los tipos con sus subtipos. Requiere permiso: tipo:read"
+    },
+    {
+      "_id": "req_tipos_get",
+      "_type": "request",
+      "parentId": "fld_tipos",
+      "name": "📁 Obtener Tipo por ID",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/tipos/{{ _.tipo_id }}",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener información detallada de un tipo específico con sus subtipos. Requiere permiso: tipo:read"
+    },
+    {
+      "_id": "req_tipos_update",
+      "_type": "request",
+      "parentId": "fld_tipos",
+      "name": "✏️ Actualizar Tipo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/tipos/{{ _.tipo_id }}",
+      "method": "PUT",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Documentos Actualizados\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Actualizar información de un tipo existente. Requiere permiso: tipo:update"
+    },
+    {
+      "_id": "req_tipos_delete",
+      "_type": "request",
+      "parentId": "fld_tipos",
+      "name": "❌ Eliminar Tipo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/tipos/{{ _.tipo_id }}",
+      "method": "DELETE",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Eliminar un tipo del sistema (soft delete). También eliminará sus subtipos en cascada. Requiere permiso: tipo:delete"
+    },
+    {
+      "_id": "req_subtipos_create",
+      "_type": "request",
+      "parentId": "fld_subtipos",
+      "name": "➕ Crear Subtipo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/subtipos",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"PDF\",\n  \"tipo_id\": 1\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Crear un nuevo subtipo asociado a un tipo. Requiere permiso: subtipo:create"
+    },
+    {
+      "_id": "req_subtipos_list",
+      "_type": "request",
+      "parentId": "fld_subtipos",
+      "name": "📋 Listar Subtipos",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/subtipos",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener lista de todos los subtipos con su tipo relacionado. Requiere permiso: subtipo:read"
+    },
+    {
+      "_id": "req_subtipos_get",
+      "_type": "request",
+      "parentId": "fld_subtipos",
+      "name": "📂 Obtener Subtipo por ID",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/subtipos/{{ _.subtipo_id }}",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener información detallada de un subtipo específico. Requiere permiso: subtipo:read"
+    },
+    {
+      "_id": "req_subtipos_by_tipo",
+      "_type": "request",
+      "parentId": "fld_subtipos",
+      "name": "🔍 Obtener Subtipos por Tipo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/subtipos/tipo/{{ _.tipo_id }}",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener todos los subtipos de un tipo específico. Requiere permiso: subtipo:read"
+    },
+    {
+      "_id": "req_subtipos_update",
+      "_type": "request",
+      "parentId": "fld_subtipos",
+      "name": "✏️ Actualizar Subtipo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/subtipos/{{ _.subtipo_id }}",
+      "method": "PUT",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"PDF Actualizado\",\n  \"tipo_id\": 1\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Actualizar información de un subtipo existente. Requiere permiso: subtipo:update"
+    },
+    {
+      "_id": "req_subtipos_delete",
+      "_type": "request",
+      "parentId": "fld_subtipos",
+      "name": "❌ Eliminar Subtipo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/subtipos/{{ _.subtipo_id }}",
+      "method": "DELETE",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Eliminar un subtipo del sistema (soft delete). Requiere permiso: subtipo:delete"
+    },
+    {
+      "_id": "req_archivos_create",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "➕ Crear Archivo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"modulo_id\": 1,\n  \"modulo_type\": \"User\",\n  \"ruta\": \"/uploads/users/\",\n  \"nombre\": \"avatar.jpg\",\n  \"extension\": \"jpg\",\n  \"archivo_new_id\": null\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Crear un nuevo archivo asociado a cualquier recurso (polimórfico). Requiere permiso: archivo:create"
+    },
+    {
+      "_id": "req_archivos_list",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "📋 Listar Archivos",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener lista de todos los archivos. Requiere permiso: archivo:read"
+    },
+    {
+      "_id": "req_archivos_filter_type",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "🔍 Filtrar por Tipo de Módulo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos?moduloType=User",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener archivos filtrados por tipo de módulo (ej: User, Tipo, Subtipo). Requiere permiso: archivo:read"
+    },
+    {
+      "_id": "req_archivos_filter_module",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "🔍 Filtrar por Módulo y ID",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos?moduloType=User&moduloId=1",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener archivos de un recurso específico (por tipo y ID). Requiere permiso: archivo:read"
+    },
+    {
+      "_id": "req_archivos_filter_new_id",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "🔍 Filtrar por archivo_new_id",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos?archivoNewId=123",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener archivos filtrados por archivo_new_id. Requiere permiso: archivo:read"
+    },
+    {
+      "_id": "req_archivos_get",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "📎 Obtener Archivo por ID",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos/{{ _.archivo_id }}",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener información detallada de un archivo específico. Requiere permiso: archivo:read"
+    },
+    {
+      "_id": "req_archivos_by_module",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "🔍 Obtener Archivos de un Recurso",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos/modulo/User/1",
+      "method": "GET",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Obtener todos los archivos de un recurso específico (ej: User con ID 1). Requiere permiso: archivo:read"
+    },
+    {
+      "_id": "req_archivos_update",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "✏️ Actualizar Archivo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos/{{ _.archivo_id }}",
+      "method": "PUT",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"avatar_actualizado.jpg\",\n  \"ruta\": \"/uploads/users/updated/\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Actualizar información de un archivo existente. Requiere permiso: archivo:update"
+    },
+    {
+      "_id": "req_archivos_delete",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "❌ Eliminar Archivo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos/{{ _.archivo_id }}",
+      "method": "DELETE",
+      "headers": [],
+      "body": {},
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Eliminar un archivo del sistema (soft delete). Requiere permiso: archivo:delete"
+    },
+    {
+      "_id": "req_example_tipo_documento",
+      "_type": "request",
+      "parentId": "fld_tipos",
+      "name": "💡 Ejemplo: Tipo Documento",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/tipos",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Documentos\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Ejemplo: Crear tipo 'Documentos' para luego agregar subtipos como PDF, Word, Excel, etc."
+    },
+    {
+      "_id": "req_example_subtipo_pdf",
+      "_type": "request",
+      "parentId": "fld_subtipos",
+      "name": "💡 Ejemplo: Subtipo PDF",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/subtipos",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"PDF\",\n  \"tipo_id\": 1\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Ejemplo: Crear subtipo 'PDF' asociado al tipo 'Documentos' (ID: 1)"
+    },
+    {
+      "_id": "req_example_archivo_user",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "💡 Ejemplo: Archivo de Usuario",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"modulo_id\": 1,\n  \"modulo_type\": \"User\",\n  \"ruta\": \"/uploads/users/avatars/\",\n  \"nombre\": \"avatar_user_1.jpg\",\n  \"extension\": \"jpg\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Ejemplo: Asociar un archivo de avatar al usuario con ID 1"
+    },
+    {
+      "_id": "req_example_archivo_tipo",
+      "_type": "request",
+      "parentId": "fld_archivos",
+      "name": "💡 Ejemplo: Archivo de Tipo",
+      "url": "{{ _.base_url }}/{{ _.api_prefix }}/archivos",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"modulo_id\": 1,\n  \"modulo_type\": \"Tipo\",\n  \"ruta\": \"/uploads/tipos/iconos/\",\n  \"nombre\": \"icono_documentos.png\",\n  \"extension\": \"png\"\n}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.jwt_token }}"
+      },
+      "description": "Ejemplo: Asociar un icono al tipo 'Documentos' (ID: 1)"
+    }
+  ]
+}
