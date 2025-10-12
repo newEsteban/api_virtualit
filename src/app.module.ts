@@ -18,6 +18,7 @@ import { TicketModule } from './ticket/ticket.module';
 import { ComentarioModule } from './comentario/comentario.module';
 import { GestionCobancModule } from './external/gestion-cobanc.module';
 import { CommandsModule } from './commands/commands.module';
+import { GitLabModule } from './gitlab/gitlab.module';
 
 /**
  * Módulo principal de la aplicación
@@ -92,6 +93,7 @@ import { CommandsModule } from './commands/commands.module';
     ComentarioModule,
     GestionCobancModule, // Módulo para migración de datos desde gestion_cobanc
     CommandsModule, // Módulo para comandos CLI
+    GitLabModule, // Módulo para integración con GitLab API
   ],
   controllers: [AppController],
   providers: [AppService],

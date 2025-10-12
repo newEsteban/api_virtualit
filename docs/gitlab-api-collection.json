@@ -1,0 +1,391 @@
+{
+  "version": "1.0",
+  "info": {
+    "name": "GitLab API Integration",
+    "description": "Colección de endpoints para testing de la integración con GitLab API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "folders": [
+    {
+      "name": "🔧 Health & Config",
+      "description": "Endpoints para verificar configuración y salud del servicio"
+    },
+    {
+      "name": "📁 Projects",
+      "description": "Gestión de proyectos GitLab"
+    },
+    {
+      "name": "🎫 Issues",
+      "description": "CRUD de issues con filtros avanzados"
+    },
+    {
+      "name": "🔄 Merge Requests",
+      "description": "Gestión de merge requests"
+    },
+    {
+      "name": "👥 Users & Metadata",
+      "description": "Usuarios y metadatos del proyecto"
+    }
+  ],
+  "requests": [
+    {
+      "name": "Health Check",
+      "folder": "🔧 Health & Config",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/health",
+      "description": "Verificar estado del servicio GitLab",
+      "headers": [],
+      "body": null,
+      "tests": [
+        "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+        "pm.test('GitLab is enabled', function () { pm.expect(pm.response.json().enabled).to.be.true; });"
+      ]
+    },
+    {
+      "name": "Get Current User",
+      "folder": "🔧 Health & Config",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/user",
+      "description": "Obtener información del usuario actual",
+      "headers": [],
+      "body": null
+    },
+    {
+      "name": "List Projects",
+      "folder": "📁 Projects",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/projects",
+      "description": "Listar todos los proyectos accesibles",
+      "headers": [],
+      "body": null
+    },
+    {
+      "name": "Get Project by ID",
+      "folder": "📁 Projects",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/projects/{{PROJECT_ID}}",
+      "description": "Obtener proyecto específico por ID",
+      "headers": [],
+      "body": null
+    },
+    {
+      "name": "Create Project",
+      "folder": "📁 Projects",
+      "method": "POST",
+      "url": "{{BASE_URL}}/api/gitlab/projects",
+      "description": "Crear nuevo proyecto",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mode": "raw",
+        "raw": "{\n  \"name\": \"Test Project from API\",\n  \"description\": \"Proyecto creado desde la API para testing\",\n  \"visibility\": \"private\",\n  \"issues_enabled\": true,\n  \"merge_requests_enabled\": true,\n  \"wiki_enabled\": false,\n  \"default_branch\": \"main\"\n}"
+      }
+    },
+    {
+      "name": "List Issues",
+      "folder": "🎫 Issues",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/issues",
+      "description": "Listar issues del proyecto por defecto",
+      "headers": [],
+      "body": null,
+      "params": [
+        {
+          "key": "project_id",
+          "value": "{{PROJECT_ID}}",
+          "description": "ID del proyecto (opcional si hay uno por defecto)"
+        },
+        {
+          "key": "state",
+          "value": "opened",
+          "description": "Estado: opened, closed, all"
+        }
+      ]
+    },
+    {
+      "name": "List Issues with Filters",
+      "folder": "🎫 Issues",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/issues",
+      "description": "Listar issues con filtros avanzados",
+      "headers": [],
+      "body": null,
+      "params": [
+        {
+          "key": "project_id",
+          "value": "{{PROJECT_ID}}"
+        },
+        {
+          "key": "state",
+          "value": "opened"
+        },
+        {
+          "key": "labels",
+          "value": "bug,critical"
+        },
+        {
+          "key": "search",
+          "value": "authentication"
+        },
+        {
+          "key": "sort",
+          "value": "created_at"
+        },
+        {
+          "key": "order_by",
+          "value": "desc"
+        }
+      ]
+    },
+    {
+      "name": "Get Issue by IID",
+      "folder": "🎫 Issues",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/issues/{{ISSUE_IID}}",
+      "description": "Obtener issue específico por IID",
+      "headers": [],
+      "body": null,
+      "params": [
+        {
+          "key": "project_id",
+          "value": "{{PROJECT_ID}}"
+        }
+      ]
+    },
+    {
+      "name": "Create Basic Issue",
+      "folder": "🎫 Issues",
+      "method": "POST",
+      "url": "{{BASE_URL}}/api/gitlab/issues",
+      "description": "Crear issue básico",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mode": "raw",
+        "raw": "{\n  \"title\": \"🐛 Bug encontrado en la autenticación\",\n  \"description\": \"## Descripción\\n\\nError al intentar hacer login con Google OAuth.\\n\\n## Pasos para reproducir\\n\\n1. Ir a /login\\n2. Hacer clic en 'Login with Google'\\n3. Completar OAuth\\n4. Error 500\\n\\n## Resultado esperado\\n\\nLogin exitoso y redirección al dashboard.\\n\\n## Resultado actual\\n\\nError 500 y mensaje 'Internal server error'\",\n  \"project_id\": {{PROJECT_ID}},\n  \"labels\": [\"bug\", \"authentication\", \"urgent\"]\n}"
+      }
+    },
+    {
+      "name": "Create Complete Issue",
+      "folder": "🎫 Issues",
+      "method": "POST",
+      "url": "{{BASE_URL}}/api/gitlab/issues",
+      "description": "Crear issue completo con todos los campos",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mode": "raw",
+        "raw": "{\n  \"title\": \"🚀 Feature: Implementar notificaciones push\",\n  \"description\": \"## Descripción\\n\\nImplementar sistema de notificaciones push para la aplicación móvil.\\n\\n## Criterios de Aceptación\\n\\n- [ ] Configurar Firebase Cloud Messaging\\n- [ ] Crear servicio de notificaciones en backend\\n- [ ] Implementar UI para gestionar notificaciones\\n- [ ] Testing en Android y iOS\\n- [ ] Documentación para desarrolladores\\n\\n## Estimación\\n\\n5 puntos de historia (1-2 semanas)\\n\\n## Referencias\\n\\n- [Documentación Firebase](https://firebase.google.com/docs/cloud-messaging)\\n- [Issue relacionado: #123](https://gitlab.com/project/issues/123)\",\n  \"project_id\": {{PROJECT_ID}},\n  \"labels\": [\"feature\", \"mobile\", \"notifications\", \"high-priority\"],\n  \"assignee_id\": {{USER_ID}},\n  \"due_date\": \"2024-12-31\",\n  \"issue_type\": \"task\",\n  \"weight\": 5,\n  \"confidential\": false\n}"
+      }
+    },
+    {
+      "name": "Update Issue",
+      "folder": "🎫 Issues",
+      "method": "PUT",
+      "url": "{{BASE_URL}}/api/gitlab/issues/{{ISSUE_IID}}",
+      "description": "Actualizar issue existente",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mode": "raw",
+        "raw": "{\n  \"title\": \"🐛 [FIXED] Bug en autenticación - Resuelto\",\n  \"description\": \"## ✅ RESUELTO\\n\\n**Fix aplicado:** Actualización de la configuración OAuth\\n**Commit:** abc123def456\\n**Testing:** ✅ Verificado en staging\\n\\n---\\n\\n## Descripción Original\\n\\nError al intentar hacer login con Google OAuth...\",\n  \"labels\": [\"bug\", \"authentication\", \"fixed\"],\n  \"assignee_id\": {{USER_ID}}\n}"
+      },
+      "params": [
+        {
+          "key": "project_id",
+          "value": "{{PROJECT_ID}}"
+        }
+      ]
+    },
+    {
+      "name": "Close Issue",
+      "folder": "🎫 Issues",
+      "method": "PUT",
+      "url": "{{BASE_URL}}/api/gitlab/issues/{{ISSUE_IID}}/close",
+      "description": "Cerrar issue",
+      "headers": [],
+      "body": null,
+      "params": [
+        {
+          "key": "project_id",
+          "value": "{{PROJECT_ID}}"
+        }
+      ]
+    },
+    {
+      "name": "Reopen Issue",
+      "folder": "🎫 Issues",
+      "method": "PUT",
+      "url": "{{BASE_URL}}/api/gitlab/issues/{{ISSUE_IID}}/reopen",
+      "description": "Reabrir issue cerrado",
+      "headers": [],
+      "body": null,
+      "params": [
+        {
+          "key": "project_id",
+          "value": "{{PROJECT_ID}}"
+        }
+      ]
+    },
+    {
+      "name": "List Merge Requests",
+      "folder": "🔄 Merge Requests",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/merge-requests",
+      "description": "Listar merge requests del proyecto",
+      "headers": [],
+      "body": null,
+      "params": [
+        {
+          "key": "project_id",
+          "value": "{{PROJECT_ID}}"
+        }
+      ]
+    },
+    {
+      "name": "Create Merge Request",
+      "folder": "🔄 Merge Requests",
+      "method": "POST",
+      "url": "{{BASE_URL}}/api/gitlab/merge-requests",
+      "description": "Crear nuevo merge request",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mode": "raw",
+        "raw": "{\n  \"title\": \"🚀 Feature: Sistema de notificaciones push\",\n  \"description\": \"## Cambios Implementados\\n\\n### ✨ Nuevas Funcionalidades\\n- ✅ Servicio de notificaciones con Firebase\\n- ✅ API endpoints para gestionar notificaciones\\n- ✅ UI para configuración de notificaciones\\n- ✅ Soporte para Android e iOS\\n\\n### 🧪 Testing\\n- ✅ Tests unitarios (95% coverage)\\n- ✅ Tests de integración\\n- ✅ Tests E2E en dispositivos reales\\n- ✅ Testing de performance\\n\\n### 📚 Documentación\\n- ✅ Documentación de API\\n- ✅ Guía de implementación\\n- ✅ Troubleshooting\\n\\n### 🔗 Issues Relacionados\\n- Closes #123\\n- Relates to #456\\n\\n## 🚀 Deploy Notes\\n\\n1. Requiere configuración de Firebase\\n2. Actualizar variables de entorno\\n3. Ejecutar migraciones de BD\\n\\n## 📱 Screenshots\\n\\n![Notification Settings](url-to-screenshot)\\n![Push Notification](url-to-screenshot)\",\n  \"source_branch\": \"feature/push-notifications\",\n  \"target_branch\": \"main\",\n  \"project_id\": {{PROJECT_ID}},\n  \"labels\": [\"feature\", \"ready-for-review\", \"mobile\"],\n  \"assignee_id\": {{USER_ID}},\n  \"remove_source_branch\": true,\n  \"squash\": true\n}"
+      }
+    },
+    {
+      "name": "Get Project Users",
+      "folder": "👥 Users & Metadata",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/projects/{{PROJECT_ID}}/users",
+      "description": "Obtener usuarios del proyecto",
+      "headers": [],
+      "body": null
+    },
+    {
+      "name": "Get Project Branches",
+      "folder": "👥 Users & Metadata",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/projects/{{PROJECT_ID}}/branches",
+      "description": "Obtener branches del proyecto",
+      "headers": [],
+      "body": null
+    },
+    {
+      "name": "Get Project Labels",
+      "folder": "👥 Users & Metadata",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/projects/{{PROJECT_ID}}/labels",
+      "description": "Obtener labels del proyecto",
+      "headers": [],
+      "body": null
+    },
+    {
+      "name": "Get Project Milestones",
+      "folder": "👥 Users & Metadata",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/projects/{{PROJECT_ID}}/milestones",
+      "description": "Obtener milestones del proyecto",
+      "headers": [],
+      "body": null
+    },
+    {
+      "name": "Get Project Pipelines",
+      "folder": "👥 Users & Metadata",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/projects/{{PROJECT_ID}}/pipelines",
+      "description": "Obtener pipelines del proyecto",
+      "headers": [],
+      "body": null
+    },
+    {
+      "name": "Get Project Commits",
+      "folder": "👥 Users & Metadata",
+      "method": "GET",
+      "url": "{{BASE_URL}}/api/gitlab/projects/{{PROJECT_ID}}/commits",
+      "description": "Obtener commits del proyecto",
+      "headers": [],
+      "body": null,
+      "params": [
+        {
+          "key": "ref_name",
+          "value": "main",
+          "description": "Branch específica (opcional)"
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:3000",
+      "description": "URL base de la API"
+    },
+    {
+      "key": "PROJECT_ID",
+      "value": "12345",
+      "description": "ID del proyecto GitLab para testing"
+    },
+    {
+      "key": "ISSUE_IID",
+      "value": "1",
+      "description": "IID del issue para testing"
+    },
+    {
+      "key": "USER_ID",
+      "value": "456",
+      "description": "ID del usuario para asignaciones"
+    }
+  ],
+  "environments": [
+    {
+      "name": "Development",
+      "variables": [
+        {
+          "key": "BASE_URL",
+          "value": "http://localhost:3000"
+        }
+      ]
+    },
+    {
+      "name": "Staging",
+      "variables": [
+        {
+          "key": "BASE_URL",
+          "value": "https://api-staging.tudominio.com"
+        }
+      ]
+    },
+    {
+      "name": "Production",
+      "variables": [
+        {
+          "key": "BASE_URL",
+          "value": "https://api.tudominio.com"
+        }
+      ]
+    }
+  ]
+}

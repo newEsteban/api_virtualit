@@ -35,6 +35,12 @@ export const envValidationSchema = Joi.object({
     NEW_SISTEMAS_DB_DATABASE: Joi.string().when('NEW_SISTEMAS_ENABLED', { is: true, then: Joi.required(), otherwise: Joi.optional() }),
     NEW_SISTEMAS_DB_SCHEMA: Joi.string().default('public'),
 
+    // GitLab API Configuration
+    GITLAB_ENABLED: Joi.boolean().default(false),
+    GITLAB_BASE_URL: Joi.string().uri().when('GITLAB_ENABLED', { is: true, then: Joi.required(), otherwise: Joi.optional() }),
+    GITLAB_ACCESS_TOKEN: Joi.string().when('GITLAB_ENABLED', { is: true, then: Joi.required(), otherwise: Joi.optional() }),
+    GITLAB_DEFAULT_PROJECT_ID: Joi.number().when('GITLAB_ENABLED', { is: true, then: Joi.required(), otherwise: Joi.optional() }),
+
     // // JWT Configuration
     JWT_SECRET: Joi.string().min(32).required(),
     JWT_EXPIRES_IN: Joi.string().default('7d'),
