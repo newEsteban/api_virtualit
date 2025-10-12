@@ -2,18 +2,18 @@ import { Injectable, Logger, Inject, Optional } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
-import { GestionCoban } from '../entities/gestion-coban.entity';
+import { TblTicketsNews } from '../entities/tbl-tickets-news.entity';
 import { Ticket } from '../../ticket/entities/ticket.entity';
 
 @Injectable()
-export class MigrationService {
-    private readonly logger = new Logger(MigrationService.name);
+export class GestionCobancMigrationService {
+    private readonly logger = new Logger(GestionCobancMigrationService.name);
     private readonly isNewSistemasEnabled: boolean;
 
     constructor(
         @Optional()
-        @InjectRepository(GestionCoban, 'newSistemasConnection')
-        private readonly gestionCobanRepository: Repository<GestionCoban>,
+        @InjectRepository(TblTicketsNews, 'newSistemasConnection')
+        private readonly tblTicketsNewsRepository: Repository<TblTicketsNews>,
 
         @InjectRepository(Ticket)
         private readonly ticketRepository: Repository<Ticket>,
@@ -41,9 +41,9 @@ export class MigrationService {
             );
         }
 
-        if (!this.gestionCobanRepository) {
+        if (!this.tblTicketsNewsRepository) {
             throw new Error(
-                '❌ Repositorio de GestionCoban no disponible. ' +
+                '❌ Repositorio de TblTicketsNews no disponible. ' +
                 'Verifica la configuración de la base de datos externa.'
             );
         }
@@ -61,68 +61,68 @@ export class MigrationService {
             this.logger.log('🚀 Iniciando migración de tickets desde gestion_coban...');
 
             // Construir query con condiciones
-            const queryBuilder = this.gestionCobanRepository.createQueryBuilder('gc');
+            const queryBuilder = this.tblTicketsNewsRepository.createQueryBuilder('tn');
 
             // Aplicar condiciones si las hay
             if (conditions.fechaDesde) {
-                queryBuilder.andWhere('gc.fecha_creacion >= :fechaDesde', {
+                queryBuilder.andWhere('tn.fecha_creacion >= :fechaDesde', {
                     fechaDesde: conditions.fechaDesde
                 });
             }
 
             if (conditions.fechaHasta) {
-                queryBuilder.andWhere('gc.fecha_creacion <= :fechaHasta', {
+                queryBuilder.andWhere('tn.fecha_creacion <= :fechaHasta', {
                     fechaHasta: conditions.fechaHasta
                 });
             }
 
             if (conditions.estado) {
-                queryBuilder.andWhere('gc.estado = :estado', {
+                queryBuilder.andWhere('tn.estado = :estado', {
                     estado: conditions.estado
                 });
             }
 
             if (conditions.ticketId) {
-                queryBuilder.andWhere('gc.ticket_id = :ticketId', {
+                queryBuilder.andWhere('tn.ticket_id = :ticketId', {
                     ticketId: conditions.ticketId
                 });
             }
 
             // Excluir tickets que ya existen en la tabla local
             queryBuilder.andWhere(
-                'gc.ticket_id NOT IN (SELECT COALESCE(ticket_new_id, 0) FROM ticket WHERE ticket_new_id IS NOT NULL)'
+                'tn.ticket_id NOT IN (SELECT COALESCE(ticket_new_id, 0) FROM ticket WHERE ticket_new_id IS NOT NULL)'
             );
 
-            const gestionCobanTickets = await queryBuilder.getMany();
+            const tblTicketsNewsRecords = await queryBuilder.getMany();
 
-            this.logger.log(`📋 Encontrados ${gestionCobanTickets.length} tickets para migrar`);
+            this.logger.log(`📋 Encontrados ${tblTicketsNewsRecords.length} tickets para migrar`);
 
             let migratedCount = 0;
 
-            for (const gcTicket of gestionCobanTickets) {
+            for (const ticketRecord of tblTicketsNewsRecords) {
                 try {
                     // Verificar si el ticket ya existe en la tabla local
                     const existingTicket = await this.ticketRepository.findOne({
-                        where: { ticket_new_id: gcTicket.ticket_id }
+                        where: { ticket_new_id: ticketRecord.ticket_id }
                     });
 
                     if (!existingTicket) {
                         // Crear nuevo ticket
                         const newTicket = this.ticketRepository.create({
-                            ticket_new_id: gcTicket.ticket_id,
-                            descripcion: gcTicket.descripcion || 'Sin descripción',
-                            url_ticket_new: gcTicket.url_ticket,
+                            ticket_new_id: ticketRecord.ticket_id,
+                            descripcion: ticketRecord.descripcion || 'Sin descripción',
+                            url_ticket_new: ticketRecord.url_ticket,
                         });
 
                         await this.ticketRepository.save(newTicket);
                         migratedCount++;
 
-                        this.logger.debug(`✅ Migrado ticket ID: ${gcTicket.ticket_id}`);
+                        this.logger.debug(`✅ Migrado ticket ID: ${ticketRecord.ticket_id}`);
                     } else {
-                        this.logger.debug(`⏭️ Ticket ID: ${gcTicket.ticket_id} ya existe, omitiendo`);
+                        this.logger.debug(`⏭️ Ticket ID: ${ticketRecord.ticket_id} ya existe, omitiendo`);
                     }
                 } catch (error) {
-                    this.logger.error(`❌ Error migrando ticket ID: ${gcTicket.ticket_id}`, error.message);
+                    this.logger.error(`❌ Error migrando ticket ID: ${ticketRecord.ticket_id}`, error.message);
                 }
             }
 
@@ -167,7 +167,7 @@ export class MigrationService {
 
             this.checkNewSistemasConnection();
 
-            const totalGestionCoban = await this.gestionCobanRepository.count();
+            const totalGestionCoban = await this.tblTicketsNewsRepository.count();
 
             // Contar tickets con referencia (ticket_new_id no nulo)
             const ticketsConReferencia = await this.ticketRepository

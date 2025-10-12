@@ -1,6 +1,6 @@
 import { Command, CommandRunner, Option } from 'nest-commander';
 import { Logger } from '@nestjs/common';
-import { MigrationService } from '../external/services/migration.service';
+import { GestionCobancMigrationService } from '../external/services/gestion-cobanc-migration.service';
 
 interface MigrateTicketsOptions {
     fechaDesde?: string;
@@ -18,7 +18,7 @@ interface MigrateTicketsOptions {
 export class MigrateTicketsCommand extends CommandRunner {
     private readonly logger = new Logger(MigrateTicketsCommand.name);
 
-    constructor(private readonly migrationService: MigrationService) {
+    constructor(private readonly gestionCobancMigrationService: GestionCobancMigrationService) {
         super();
     }
 
@@ -34,7 +34,7 @@ export class MigrateTicketsCommand extends CommandRunner {
 
             // Construir condiciones de filtrado
             const conditions: any = {};
-            
+
             if (options?.fechaDesde) {
                 conditions.fechaDesde = new Date(options.fechaDesde);
                 this.logger.log(`📅 Filtro fecha desde: ${options.fechaDesde}`);
@@ -64,8 +64,8 @@ export class MigrateTicketsCommand extends CommandRunner {
             }
 
             // Ejecutar migración
-            const migratedCount = await this.migrationService.migrateTicketsFromGestionCoban(conditions);
-            
+            const migratedCount = await this.gestionCobancMigrationService.migrateTicketsFromGestionCoban(conditions);
+
             this.logger.log(`✅ Migración completada exitosamente!`);
             this.logger.log(`📊 Total de tickets migrados: ${migratedCount}`);
 
@@ -137,8 +137,8 @@ export class MigrateTicketsCommand extends CommandRunner {
 
     private async showStats(): Promise<void> {
         try {
-            const stats = await this.migrationService.getMigrationStats();
-            
+            const stats = await this.gestionCobancMigrationService.getMigrationStats();
+
             this.logger.log('📊 === ESTADÍSTICAS DE MIGRACIÓN ===');
             this.logger.log(`📋 Total tickets en gestion_coban: ${stats.totalGestionCoban}`);
             this.logger.log(`🎫 Total tickets en tabla local: ${stats.totalTicketsLocal}`);

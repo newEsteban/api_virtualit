@@ -1,11 +1,16 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 /**
- * Entidad para la tabla tbl_tickets_news de la base de datos externa gestion_coban
- * Esta entidad es de solo lectura para migrar datos a la tabla ticket local
+ * Entidad para la tabla tbl_tickets_news de la base de datos gestion_cobanc
+ * 
+ * Esta entidad mapea la tabla tbl_tickets_news que contiene los tickets 
+ * del sistema legacy ubicado en la base de datos gestion_cobanc.
+ * 
+ * Uso: Solo lectura para migración de datos a la tabla ticket local.
+ * Conexión: newSistemasConnection (MySQL/MariaDB)
  */
 @Entity('tbl_tickets_news')
-export class GestionCoban {
+export class TblTicketsNews {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -27,6 +32,6 @@ export class GestionCoban {
     @Column({ type: 'timestamp', nullable: true })
     fecha_actualizacion: Date;
 
-    // Agregar más campos según la estructura real de tu tabla gestion_coban
-    // Puedes ajustar estos campos según tu esquema real
+    // Agregar más campos según la estructura real de tbl_tickets_news
+    // Esta entidad puede expandirse conforme se identifiquen más campos necesarios
 }

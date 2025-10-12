@@ -18,4 +18,4 @@ import { Ticket } from '../ticket/entities/ticket.entity';
   providers: [GestionCobancMigrationService],
   exports: [GestionCobancMigrationService],
 })
-export class ExternalModule { }
+export class GestionCobancModule { }

@@ -16,7 +16,7 @@ import { TipoModule } from './tipo/tipo.module';
 import { ArchivoModule } from './archivo/archivo.module';
 import { TicketModule } from './ticket/ticket.module';
 import { ComentarioModule } from './comentario/comentario.module';
-import { ExternalModule } from './external/external.module';
+import { GestionCobancModule } from './external/gestion-cobanc.module';
 import { CommandsModule } from './commands/commands.module';
 
 /**
@@ -90,7 +90,7 @@ import { CommandsModule } from './commands/commands.module';
     ArchivoModule,
     TicketModule,
     ComentarioModule,
-    ExternalModule, // Módulo para migración de datos externos
+    GestionCobancModule, // Módulo para migración de datos desde gestion_cobanc
     CommandsModule, // Módulo para comandos CLI
   ],
   controllers: [AppController],

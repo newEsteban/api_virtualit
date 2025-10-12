@@ -1,11 +1,11 @@
 import { Controller, Post, Get, Query, Logger } from '@nestjs/common';
-import { MigrationService } from '../services/migration.service';
+import { GestionCobancMigrationService } from '../services/gestion-cobanc-migration.service';
 
 @Controller('migration')
 export class MigrationController {
     private readonly logger = new Logger(MigrationController.name);
 
-    constructor(private readonly migrationService: MigrationService) {}
+    constructor(private readonly gestionCobancMigrationService: GestionCobancMigrationService) { }
 
     /**
      * Ejecuta la migración de tickets desde gestion_coban a la tabla local
@@ -22,7 +22,7 @@ export class MigrationController {
             this.logger.log('Iniciando migración de tickets...');
 
             const conditions: any = {};
-            
+
             if (fechaDesde) {
                 conditions.fechaDesde = new Date(fechaDesde);
             }
@@ -39,8 +39,8 @@ export class MigrationController {
                 conditions.ticketId = parseInt(ticketId, 10);
             }
 
-            const migratedCount = await this.migrationService.migrateTicketsFromGestionCoban(conditions);
-            
+            const migratedCount = await this.gestionCobancMigrationService.migrateTicketsFromGestionCoban(conditions);
+
             return {
                 success: true,
                 message: 'Migración completada exitosamente',
@@ -65,8 +65,8 @@ export class MigrationController {
     @Get('stats')
     async getStats() {
         try {
-            const stats = await this.migrationService.getMigrationStats();
-            
+            const stats = await this.gestionCobancMigrationService.getMigrationStats();
+
             return {
                 success: true,
                 stats,

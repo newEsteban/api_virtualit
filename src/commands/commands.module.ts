@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MigrateTicketsCommand } from './migrate-tickets.command';
-import { ExternalModule } from '../external/external.module';
+import { GestionCobancModule } from '../external/gestion-cobanc.module';
 
 /**
  * Módulo para comandos de consola
@@ -8,7 +8,7 @@ import { ExternalModule } from '../external/external.module';
  * Centraliza todos los comandos CLI de la aplicación
  */
 @Module({
-    imports: [ExternalModule], // Importar para acceder al MigrationService
+    imports: [GestionCobancModule], // Importar para acceder al GestionCobancMigrationService
     providers: [MigrateTicketsCommand],
     exports: [MigrateTicketsCommand],
 })
