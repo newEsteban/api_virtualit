@@ -26,12 +26,13 @@ export const envValidationSchema = Joi.object({
     DB_NEW_SISTEMAS_NAME: Joi.string().required(),
 
     // New Sistemas Database Configuration (MariaDB)
-    NEW_SISTEMAS_DB_TYPE: Joi.string().valid('mariadb', 'mysql').default('mariadb'),
-    NEW_SISTEMAS_DB_HOST: Joi.string().required(),
+    NEW_SISTEMAS_ENABLED: Joi.boolean().default(false),
+    NEW_SISTEMAS_DB_TYPE: Joi.string().valid('mariadb', 'mysql').default('mysql'),
+    NEW_SISTEMAS_DB_HOST: Joi.string().when('NEW_SISTEMAS_ENABLED', { is: true, then: Joi.required(), otherwise: Joi.optional() }),
     NEW_SISTEMAS_DB_PORT: Joi.number().port().default(3306),
-    NEW_SISTEMAS_DB_USERNAME: Joi.string().required(),
+    NEW_SISTEMAS_DB_USERNAME: Joi.string().when('NEW_SISTEMAS_ENABLED', { is: true, then: Joi.required(), otherwise: Joi.optional() }),
     NEW_SISTEMAS_DB_PASSWORD: Joi.string().allow('').default(''),
-    NEW_SISTEMAS_DB_DATABASE: Joi.string().required(),
+    NEW_SISTEMAS_DB_DATABASE: Joi.string().when('NEW_SISTEMAS_ENABLED', { is: true, then: Joi.required(), otherwise: Joi.optional() }),
     NEW_SISTEMAS_DB_SCHEMA: Joi.string().default('public'),
 
     // // JWT Configuration

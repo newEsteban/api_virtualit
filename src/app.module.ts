@@ -46,14 +46,38 @@ import { CommandsModule } from './commands/commands.module';
     // Conexión principal a la base de datos
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (configService: any) => typeOrmConfig(configService),
+      useFactory: (configService: ConfigService) => typeOrmConfig(configService),
       imports: [ConfigModule],
     }),
-    // Conexión de solo lectura a new_sistemas
+    // Conexión condicional de solo lectura a new_sistemas
     TypeOrmModule.forRootAsync({
       name: 'newSistemasConnection',
       inject: [ConfigService],
-      useFactory: (configService: any) => typeOrmNewSistemasConfig(configService),
+      useFactory: (configService: ConfigService) => {
+        const config = typeOrmNewSistemasConfig(configService);
+        if (!config) {
+          // Si NEW_SISTEMAS_ENABLED=false, retornar configuración vacía que TypeORM ignorará
+          return {
+            name: 'newSistemasConnection',
+            type: 'mysql',
+            host: 'localhost',
+            port: 3306,
+            username: 'disabled',
+            password: 'disabled',
+            database: 'disabled',
+            entities: [],
+            synchronize: false,
+            autoLoadEntities: false,
+            // Configuración que hace que la conexión no se establezca realmente
+            extra: {
+              connectionLimit: 0,
+            },
+            // Desactivar la conexión completamente
+            manualInitialization: true,
+          };
+        }
+        return config;
+      },
       imports: [ConfigModule],
     }),
     UserModule,
