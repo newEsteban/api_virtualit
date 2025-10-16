@@ -26,7 +26,7 @@ export const typeOrmNewSistemasConfig = (configService: ConfigService): TypeOrmM
 
     return {
         name: 'newSistemasConnection', // Nombre único para la conexión
-        type: 'mysql',
+        type: configService.get<string>('NEW_SISTEMAS_DB_TYPE') as 'mariadb',
         host: configService.get<string>('NEW_SISTEMAS_DB_HOST'),
         port: configService.get<number>('NEW_SISTEMAS_DB_PORT'),
         username: configService.get<string>('NEW_SISTEMAS_DB_USERNAME'),
@@ -39,7 +39,13 @@ export const typeOrmNewSistemasConfig = (configService: ConfigService): TypeOrmM
         synchronize: false, // ⚠️ IMPORTANTE: Mantener en false para conexión de solo lectura
         logging: configService.get<string>('NODE_ENV') === 'development',
         // Configuración adicional para mayor robustez
-        connectTimeout: 10000, // 10 segundos timeout
-        acquireTimeout: 10000,
+        connectTimeout: 10000, // 10 segundos timeout de conexión
+        extra: {
+            connectionLimit: 10,
+            acquireTimeout: 10000, // Movemos acquireTimeout a extra donde es válido
+            timeout: 10000,
+        },
+        retryAttempts: 3,
+        retryDelay: 3000,
     };
 };

@@ -18,12 +18,7 @@ export const envValidationSchema = Joi.object({
     DB_PASSWORD: Joi.string().required(),
     DB_NAME: Joi.string().required(),
 
-    // Database Configuration - New Sistemas (Read Only)
-    DB_NEW_SISTEMAS_HOST: Joi.string().required(),
-    DB_NEW_SISTEMAS_PORT: Joi.number().port().default(5432),
-    DB_NEW_SISTEMAS_USERNAME: Joi.string().required(),
-    DB_NEW_SISTEMAS_PASSWORD: Joi.string().required(),
-    DB_NEW_SISTEMAS_NAME: Joi.string().required(),
+
 
     // New Sistemas Database Configuration (MariaDB)
     NEW_SISTEMAS_ENABLED: Joi.boolean().default(false),

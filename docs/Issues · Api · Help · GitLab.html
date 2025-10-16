@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)http://gitlab.cobanc.cl/help/api/issues.md -->
+<html class="" lang="en"><head prefix="og: http://ogp.me/ns#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="object" property="og:type">
+<meta content="GitLab" property="og:site_name">
+<meta content="Issues · Api · Help" property="og:title">
+<meta content="GitLab Community Edition" property="og:description">
+<meta content="http://gitlab.cobanc.cl/assets/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png" property="og:image">
+<meta content="64" property="og:image:width">
+<meta content="64" property="og:image:height">
+<meta content="http://gitlab.cobanc.cl/help/api/issues.md" property="og:url">
+<meta content="summary" property="twitter:card">
+<meta content="Issues · Api · Help" property="twitter:title">
+<meta content="GitLab Community Edition" property="twitter:description">
+<meta content="http://gitlab.cobanc.cl/assets/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png" property="twitter:image">
+
+<title>Issues · Api · Help · GitLab</title>
+<meta content="GitLab Community Edition" name="description">
+<link rel="shortcut icon" type="image/x-icon" href="http://gitlab.cobanc.cl/assets/favicon-075eba76312e8421991a0c1f89a89ee81678bcde72319dd3e8047e2a47cd3a42.ico" id="favicon">
+<link rel="stylesheet" media="all" href="./Issues · Api · Help · GitLab_files/application-5d7e6d1ac77307dcc1fdaae829f847d001c9d79eb2991e8c99d4a8a56c5da794.css">
+<link rel="stylesheet" media="print" href="./Issues · Api · Help · GitLab_files/print-74b3d49adeaada27337e759b75a34af7cf3d80051de91d60d40570f5a382e132.css">
+
+
+<script>
+//<![CDATA[
+window.gon={};gon.api_version="v4";gon.default_avatar_url="http:\/\/gitlab.cobanc.cl\/assets\/no_avatar-849f9c04a3a0d0cea2424ae97b27447dc64a7dbfae83c036c45b403392f0e8ba.png";gon.max_file_size=10;gon.asset_host=null;gon.webpack_public_path="\/assets\/webpack\/";gon.relative_url_root="";gon.shortcuts_path="\/help\/shortcuts";gon.user_color_scheme="white";gon.katex_css_url="\/assets\/katex-dc07578acd203b2dd73a8c78cdb8dcb79144ba11a23749d80904496b7ff8a650.css";gon.katex_js_url="\/assets\/katex-04bcf56379fcda0ee7c7a63f71d0fc15ffd2e014d017cd9d51fd6554dfccf40a.js";gon.gitlab_url="http:\/\/gitlab.cobanc.cl";gon.revision="7c30d48";gon.gitlab_logo="\/assets\/gitlab_logo-7ae504fe4f68fdebb3c2034e36621930cd36ea87924c11ff65dbcb8ed50dca58.png";gon.sprite_icons="\/assets\/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg";gon.current_user_id=12;gon.current_username="ecardona";gon.current_user_fullname="Esteban Cardona Orozco";gon.current_user_avatar_url="\/uploads\/-\/system\/user\/avatar\/12\/avatar.png";
+//]]>
+</script>
+
+<script src="./Issues · Api · Help · GitLab_files/webpack_runtime.dd52cacf6ba6b154d651.bundle.js" defer="defer"></script>
+<script src="./Issues · Api · Help · GitLab_files/common.8bddea71fd957afe6146.bundle.js" defer="defer"></script>
+<script src="./Issues · Api · Help · GitLab_files/main.6db52f1e5bd2ca79508d.bundle.js" defer="defer"></script>
+
+
+
+<script src="./Issues · Api · Help · GitLab_files/help.beeadb0a8273139fc2ff.bundle.js" defer="defer"></script>
+
+
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="/Ys437KoF4hS5o2qirBHHmViRsfWLWSREmiyT7qQ1KhU+FrJPOuEqmpBWiJXjhwFdfjEJXuircADUFBMpsorrg==">
+<meta content="origin-when-cross-origin" name="referrer">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+<meta content="#474D57" name="theme-color">
+<link rel="apple-touch-icon" type="image/x-icon" href="http://gitlab.cobanc.cl/assets/touch-icon-iphone-5a9cee0e8a51212e70b90c87c12f382c428870c0ff67d1eb034d884b78d2dae7.png">
+<link rel="apple-touch-icon" type="image/x-icon" href="http://gitlab.cobanc.cl/assets/touch-icon-ipad-a6eec6aeb9da138e507593b464fdac213047e49d3093fc30e90d9a995df83ba3.png" sizes="76x76">
+<link rel="apple-touch-icon" type="image/x-icon" href="http://gitlab.cobanc.cl/assets/touch-icon-iphone-retina-72e2aadf86513a56e050e7f0f2355deaa19cc17ed97bbe5147847f2748e5a3e3.png" sizes="120x120">
+<link rel="apple-touch-icon" type="image/x-icon" href="http://gitlab.cobanc.cl/assets/touch-icon-ipad-retina-8ebe416f5313483d9c1bc772b5bbe03ecad52a54eba443e5215a22caed2a16a2.png" sizes="152x152">
+<link color="rgb(226, 67, 41)" href="http://gitlab.cobanc.cl/assets/logo-d36b5212042cebc89b96df4bf6ac24e43db316143e89926c0db839ff694d2de4.svg" rel="mask-icon">
+<meta content="/assets/msapplication-tile-1196ec67452f618d39cdd85e2e3a542f76574c071051ae7effbfde01710eb17d.png" name="msapplication-TileImage">
+<meta content="#30353E" name="msapplication-TileColor">
+
+
+
+<script type="text/javascript" charset="utf-8" async="" src="./Issues · Api · Help · GitLab_files/emoji.417855bdfb79bfed184f.chunk.js"></script></head>
+
+<body class="ui_indigo " data-group="" data-page="help:show" data-project="">
+
+
+<header class="navbar navbar-gitlab">
+<a class="sr-only gl-accessibility" href="http://gitlab.cobanc.cl/help/api/issues.md#content-body" tabindex="1">Skip to content</a>
+<div class="container-fluid">
+<div class="header-content">
+<div class="title-container">
+<h1 class="title">
+<a title="Dashboard" id="logo" href="http://gitlab.cobanc.cl/"><img class="js-lazy-loaded" src="./Issues · Api · Help · GitLab_files/Logo_virtualit_alta_negro_chico.png">
+<span class="logo-text hidden-xs">
+
+</span>
+</a></h1>
+<ul class="list-unstyled navbar-sub-nav">
+<li id="nav-projects-dropdown" class="home dropdown header-projects"><a data-toggle="dropdown" href="http://gitlab.cobanc.cl/help/api/issues.md#">
+Projects
+<svg class=" caret-down"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#angle-down"></use></svg>
+</a>
+<div class="dropdown-menu projects-dropdown-menu">
+<div class="projects-dropdown-container">
+<div class="project-dropdown-sidebar">
+<ul>
+<li class=""><a href="http://gitlab.cobanc.cl/dashboard/projects">Your projects
+</a></li><li class=""><a href="http://gitlab.cobanc.cl/dashboard/projects/starred">Starred projects
+</a></li><li class=""><a href="http://gitlab.cobanc.cl/explore">Explore projects
+</a></li></ul>
+</div>
+<div class="project-dropdown-content">
+<div><div class="search-input-container hidden-xs"><input type="search" placeholder="Search your projects" class="form-control" value=""> <i aria-hidden="true" class="search-icon fa fa-fw fa-search"></i></div> <!----> <!----> <!----> <!----></div>
+</div>
+</div>
+
+</div>
+</li><li class="hidden-xs"><a class="dashboard-shortcuts-groups" title="Groups" href="http://gitlab.cobanc.cl/dashboard/groups">Groups
+</a></li><li class="visible-lg"><a class="dashboard-shortcuts-activity" title="Activity" href="http://gitlab.cobanc.cl/dashboard/activity">Activity
+</a></li><li class="visible-lg"><a class="dashboard-shortcuts-milestones" title="Milestones" href="http://gitlab.cobanc.cl/dashboard/milestones">Milestones
+</a></li><li class="visible-lg"><a class="dashboard-shortcuts-snippets" title="Snippets" href="http://gitlab.cobanc.cl/dashboard/snippets">Snippets
+</a></li><li class="header-more dropdown hidden-lg">
+<a data-toggle="dropdown" href="http://gitlab.cobanc.cl/help/api/issues.md#">
+More
+<svg class=" caret-down"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#angle-down"></use></svg>
+</a>
+<div class="dropdown-menu">
+<ul>
+<li class="visible-xs"><a class="dashboard-shortcuts-groups" title="Groups" href="http://gitlab.cobanc.cl/dashboard/groups">Groups
+</a></li><li class=""><a title="Activity" href="http://gitlab.cobanc.cl/dashboard/activity">Activity
+</a></li><li class=""><a class="dashboard-shortcuts-milestones" title="Milestones" href="http://gitlab.cobanc.cl/dashboard/milestones">Milestones
+</a></li><li class=""><a class="dashboard-shortcuts-snippets" title="Snippets" href="http://gitlab.cobanc.cl/dashboard/snippets">Snippets
+</a></li></ul>
+</div>
+</li>
+<li class="hidden">
+<a title="Projects" class="dashboard-shortcuts-projects" href="http://gitlab.cobanc.cl/dashboard/projects">Projects
+</a></li>
+</ul>
+
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="header-new dropdown">
+<a class="header-new-dropdown-toggle has-tooltip" title="New..." ref="tooltip" aria-label="New..." data-toggle="dropdown" data-placement="bottom" data-container="body" href="http://gitlab.cobanc.cl/projects/new"><svg class="s16"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#plus-square"></use></svg>
+<svg class=" caret-down"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#angle-down"></use></svg>
+</a><div class="dropdown-menu-nav dropdown-menu-align-right">
+<ul>
+<li>
+<a href="http://gitlab.cobanc.cl/projects/new">New project</a>
+</li>
+<li>
+<a href="http://gitlab.cobanc.cl/groups/new">New group</a>
+</li>
+<li>
+<a href="http://gitlab.cobanc.cl/snippets/new">New snippet</a>
+</li>
+</ul>
+</div>
+</li>
+
+<li class="hidden-sm hidden-xs">
+<div class="search search-form">
+<form class="navbar-form" action="http://gitlab.cobanc.cl/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓"><div class="search-input-container">
+<div class="search-input-wrap">
+<div class="dropdown" data-url="/search/autocomplete">
+<input type="search" name="search" id="search" placeholder="Search" class="search-input dropdown-menu-toggle no-outline js-search-dashboard-options disabled" spellcheck="false" tabindex="1" autocomplete="off" data-issues-path="/dashboard/issues" data-mr-path="/dashboard/merge_requests" aria-label="Search" value="">
+<button class="hidden js-dropdown-search-toggle" data-toggle="dropdown" type="button"></button>
+<div class="dropdown-menu dropdown-select">
+<div class="dropdown-content"><ul>
+<li class="dropdown-menu-empty-item">
+<a>
+Loading...
+</a>
+</li>
+</ul>
+</div><div class="dropdown-loading"><i aria-hidden="true" data-hidden="true" class="fa fa-spinner fa-spin"></i></div>
+</div>
+<svg class="s16 search-icon"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#search"></use></svg>
+<svg class="s16 clear-icon js-clear-input"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#close"></use></svg>
+</div>
+</div>
+</div>
+<input type="hidden" name="group_id" id="group_id" class="js-search-group-options">
+<input type="hidden" name="project_id" id="search_project_id" value="" class="js-search-project-options">
+<input type="hidden" name="repository_ref" id="repository_ref">
+
+<div class="search-autocomplete-opts hide" data-autocomplete-path="/search/autocomplete"></div>
+</form></div>
+
+</li>
+<li class="visible-sm-inline-block visible-xs-inline-block">
+<a title="Search" aria-label="Search" data-toggle="tooltip" data-placement="bottom" data-container="body" href="http://gitlab.cobanc.cl/search"><svg class="s16"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#search"></use></svg>
+</a></li>
+<li class="user-counter"><a title="Issues" class="dashboard-shortcuts-issues" aria-label="Issues" data-toggle="tooltip" data-placement="bottom" data-container="body" href="http://gitlab.cobanc.cl/dashboard/issues?assignee_id=12"><svg class="s16"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#issues"></use></svg>
+<span class="badge issues-count">
+3
+</span>
+</a></li><li class="user-counter"><a title="Merge requests" class="dashboard-shortcuts-merge_requests" aria-label="Merge requests" data-toggle="tooltip" data-placement="bottom" data-container="body" href="http://gitlab.cobanc.cl/dashboard/merge_requests?assignee_id=12"><svg class="s16"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#git-merge"></use></svg>
+<span class="badge hidden merge-requests-count">
+0
+</span>
+</a></li><li class="user-counter"><a title="Todos" aria-label="Todos" class="shortcuts-todos" data-toggle="tooltip" data-placement="bottom" data-container="body" href="http://gitlab.cobanc.cl/dashboard/todos"><svg class="s16"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#todo-done"></use></svg>
+<span class="badge todos-count">
+36
+</span>
+</a></li><li class="header-user dropdown">
+<a class="header-user-dropdown-toggle" data-toggle="dropdown" href="http://gitlab.cobanc.cl/ecardona"><img width="23" height="23" class="header-user-avatar js-lazy-loaded" src="./Issues · Api · Help · GitLab_files/avatar.png">
+<svg class=" caret-down"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#angle-down"></use></svg>
+</a><div class="dropdown-menu-nav dropdown-menu-align-right">
+<ul>
+<li class="current-user">
+<div class="user-name bold">
+Esteban Cardona Orozco
+</div>
+@ecardona
+</li>
+<li class="divider"></li>
+<li>
+<a class="profile-link" data-user="ecardona" href="http://gitlab.cobanc.cl/ecardona">Profile</a>
+</li>
+<li>
+<a href="http://gitlab.cobanc.cl/profile">Settings</a>
+</li>
+<li>
+<a href="http://gitlab.cobanc.cl/help">Help</a>
+</li>
+<li class="divider"></li>
+<li>
+<a class="sign-out-link" href="http://gitlab.cobanc.cl/users/sign_out">Sign out</a>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<button class="navbar-toggle hidden-sm hidden-md hidden-lg" type="button">
+<span class="sr-only">Toggle navigation</span>
+<svg class="s12 more-icon js-navbar-toggle-right"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#more"></use></svg>
+<svg class="s12 close-icon js-navbar-toggle-left"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#close"></use></svg>
+</button>
+</div>
+</div>
+</header>
+
+<div class="page-with-sidebar">
+<div class="content-wrapper page-with-new-nav">
+
+<div class="mobile-overlay"></div>
+<div class="alert-wrapper">
+
+
+<nav class="breadcrumbs container-fluid container-limited" role="navigation">
+<div class="breadcrumbs-container">
+<div class="breadcrumbs-links js-title-container">
+<ul class="list-unstyled breadcrumbs-list js-breadcrumbs-list">
+<li><a href="http://gitlab.cobanc.cl/help">Help</a><svg class="s8 breadcrumbs-list-angle"><use xlink:href="/assets/icons-e18ff9bb200a2eb092fb610d1592af76d420722d4d8b7d48d6b20c7911bf532a.svg#angle-right"></use></svg></li>
+
+<li>
+<h2 class="breadcrumbs-sub-title"><a href="http://gitlab.cobanc.cl/help/api/issues.md">Help</a></h2>
+</li>
+</ul>
+</div>
+
+</div>
+</nav>
+
+<div class="flash-container flash-container-page">
+</div>
+
+</div>
+<div class="container-fluid container-limited ">
+<div class="content" id="content-body">
+<div class="documentation wiki prepend-top-default">
+<h1 dir="auto">
+<a id="user-content-issues-api" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#issues-api" aria-hidden="true"></a>Issues API</h1>
+
+<p dir="auto">Every API call to issues must be authenticated.</p>
+
+<p dir="auto">If a user is not a member of a project and the project is private, a <code>GET</code>
+request on that project will result to a <code>404</code> status code.</p>
+
+<h2 dir="auto">
+<a id="user-content-issues-pagination" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#issues-pagination" aria-hidden="true"></a>Issues pagination</h2>
+
+<p dir="auto">By default, <code>GET</code> requests return 20 results at a time because the API results
+are paginated.</p>
+
+<p dir="auto">Read more on <a href="http://gitlab.cobanc.cl/help/api/README.md#pagination">pagination</a>.</p>
+
+<h2 dir="auto">
+<a id="user-content-list-issues" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#list-issues" aria-hidden="true"></a>List issues</h2>
+
+<p dir="auto">Get all issues the authenticated user has access to. By default it
+returns only issues created by the current user. To get all issues,
+use parameter <code>scope=all</code>.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">GET /issues</span>
+<span id="LC2" class="line" lang="plaintext">GET /issues?state=opened</span>
+<span id="LC3" class="line" lang="plaintext">GET /issues?state=closed</span>
+<span id="LC4" class="line" lang="plaintext">GET /issues?labels=foo</span>
+<span id="LC5" class="line" lang="plaintext">GET /issues?labels=foo,bar</span>
+<span id="LC6" class="line" lang="plaintext">GET /issues?labels=foo,bar&amp;state=opened</span>
+<span id="LC7" class="line" lang="plaintext">GET /issues?milestone=1.0.0</span>
+<span id="LC8" class="line" lang="plaintext">GET /issues?milestone=1.0.0&amp;state=opened</span>
+<span id="LC9" class="line" lang="plaintext">GET /issues?iids[]=42&amp;iids[]=43</span>
+<span id="LC10" class="line" lang="plaintext">GET /issues?author_id=5</span>
+<span id="LC11" class="line" lang="plaintext">GET /issues?assignee_id=5</span>
+<span id="LC12" class="line" lang="plaintext">GET /issues?my_reaction_emoji=star</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return all issues or just those that are <code>opened</code> or <code>closed</code>
+</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>string</td>
+<td>no</td>
+<td>Comma-separated list of label names, issues must have all labels to be returned. <code>No+Label</code> lists all issues with no labels</td>
+</tr>
+<tr>
+<td><code>milestone</code></td>
+<td>string</td>
+<td>no</td>
+<td>The milestone title</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues for the given scope: <code>created-by-me</code>, <code>assigned-to-me</code> or <code>all</code>. Defaults to <code>created-by-me</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>author_id</code></td>
+<td>integer</td>
+<td>no</td>
+<td>Return issues created by the given user <code>id</code>. Combine with <code>scope=all</code> or <code>scope=assigned-to-me</code>. <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>assignee_id</code></td>
+<td>integer</td>
+<td>no</td>
+<td>Return issues assigned to the given user <code>id</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>my_reaction_emoji</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues reacted by the authenticated user by the given <code>emoji</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/14016" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 10.0)</em>
+</td>
+</tr>
+<tr>
+<td><code>iids[]</code></td>
+<td>Array[integer]</td>
+<td>no</td>
+<td>Return only the issues having the given <code>iid</code>
+</td>
+</tr>
+<tr>
+<td><code>order_by</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues ordered by <code>created_at</code> or <code>updated_at</code> fields. Default is <code>created_at</code>
+</td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues sorted in <code>asc</code> or <code>desc</code> order. Default is <code>desc</code>
+</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td>string</td>
+<td>no</td>
+<td>Search issues against their <code>title</code> and <code>description</code>
+</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/issues</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">[</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">   </span><span class="p">{</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">      </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Ratione dolores corrupti mollitia soluta quia."</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">      </span><span class="s2">"author"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/eileen.lowe"</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Alexandra Bashirian"</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"eileen.lowe"</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">      </span><span class="s2">"milestone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">         </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">         </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Ducimus nam enim ex consequatur cumque ratione."</span><span class="p">,</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">         </span><span class="s2">"due_date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">         </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">         </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:39.996Z"</span><span class="p">,</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">         </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v4.0"</span><span class="p">,</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">         </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:39.996Z"</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">      </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">      </span><span class="s2">"assignees"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[{</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Administrator"</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/root"</span><span class="p">,</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">      </span><span class="p">}],</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">      </span><span class="s2">"assignee"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Administrator"</span><span class="p">,</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/root"</span><span class="p">,</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">      </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:51.081Z"</span><span class="p">,</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">      </span><span class="s2">"closed_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC43" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span></span>
+<span id="LC44" class="line" lang="json"><span class="w">      </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Consequatur vero maxime deserunt laboriosam est voluptas dolorem."</span><span class="p">,</span></span>
+<span id="LC45" class="line" lang="json"><span class="w">      </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:51.081Z"</span><span class="p">,</span></span>
+<span id="LC46" class="line" lang="json"><span class="w">      </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span></span>
+<span id="LC47" class="line" lang="json"><span class="w">      </span><span class="s2">"labels"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC48" class="line" lang="json"><span class="w">      </span><span class="s2">"user_notes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC49" class="line" lang="json"><span class="w">      </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-22"</span><span class="p">,</span></span>
+<span id="LC50" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/6"</span><span class="p">,</span></span>
+<span id="LC51" class="line" lang="json"><span class="w">      </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC52" class="line" lang="json"><span class="w">         </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC53" class="line" lang="json"><span class="w">         </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC54" class="line" lang="json"><span class="w">         </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC55" class="line" lang="json"><span class="w">         </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC56" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC57" class="line" lang="json"><span class="w">      </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC58" class="line" lang="json"><span class="w">      </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></span>
+<span id="LC59" class="line" lang="json"><span class="w">   </span><span class="p">}</span></span>
+<span id="LC60" class="line" lang="json"><span class="p">]</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-list-group-issues" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#list-group-issues" aria-hidden="true"></a>List group issues</h2>
+
+<p dir="auto">Get a list of a group's issues.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">GET /groups/:id/issues</span>
+<span id="LC2" class="line" lang="plaintext">GET /groups/:id/issues?state=opened</span>
+<span id="LC3" class="line" lang="plaintext">GET /groups/:id/issues?state=closed</span>
+<span id="LC4" class="line" lang="plaintext">GET /groups/:id/issues?labels=foo</span>
+<span id="LC5" class="line" lang="plaintext">GET /groups/:id/issues?labels=foo,bar</span>
+<span id="LC6" class="line" lang="plaintext">GET /groups/:id/issues?labels=foo,bar&amp;state=opened</span>
+<span id="LC7" class="line" lang="plaintext">GET /groups/:id/issues?milestone=1.0.0</span>
+<span id="LC8" class="line" lang="plaintext">GET /groups/:id/issues?milestone=1.0.0&amp;state=opened</span>
+<span id="LC9" class="line" lang="plaintext">GET /groups/:id/issues?iids[]=42&amp;iids[]=43</span>
+<span id="LC10" class="line" lang="plaintext">GET /groups/:id/issues?search=issue+title+or+description</span>
+<span id="LC11" class="line" lang="plaintext">GET /groups/:id/issues?author_id=5</span>
+<span id="LC12" class="line" lang="plaintext">GET /groups/:id/issues?assignee_id=5</span>
+<span id="LC13" class="line" lang="plaintext">GET /groups/:id/issues?my_reaction_emoji=star</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the group</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return all issues or just those that are <code>opened</code> or <code>closed</code>
+</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>string</td>
+<td>no</td>
+<td>Comma-separated list of label names, issues must have all labels to be returned. <code>No+Label</code> lists all issues with no labels</td>
+</tr>
+<tr>
+<td><code>iids[]</code></td>
+<td>Array[integer]</td>
+<td>no</td>
+<td>Return only the issues having the given <code>iid</code>
+</td>
+</tr>
+<tr>
+<td><code>milestone</code></td>
+<td>string</td>
+<td>no</td>
+<td>The milestone title</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues for the given scope: <code>created-by-me</code>, <code>assigned-to-me</code> or <code>all</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>author_id</code></td>
+<td>integer</td>
+<td>no</td>
+<td>Return issues created by the given user <code>id</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>assignee_id</code></td>
+<td>integer</td>
+<td>no</td>
+<td>Return issues assigned to the given user <code>id</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>my_reaction_emoji</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues reacted by the authenticated user by the given <code>emoji</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/14016" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 10.0)</em>
+</td>
+</tr>
+<tr>
+<td><code>order_by</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues ordered by <code>created_at</code> or <code>updated_at</code> fields. Default is <code>created_at</code>
+</td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues sorted in <code>asc</code> or <code>desc</code> order. Default is <code>desc</code>
+</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td>string</td>
+<td>no</td>
+<td>Search group issues against their <code>title</code> and <code>description</code>
+</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/groups/4/issues</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">[</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">   </span><span class="p">{</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">      </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">      </span><span class="s2">"milestone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">         </span><span class="s2">"due_date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">         </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">         </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Rerum est voluptatem provident consequuntur molestias similique ipsum dolor."</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">         </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">         </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v3.0"</span><span class="p">,</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">         </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:39.788Z"</span><span class="p">,</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">         </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:39.788Z"</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">      </span><span class="s2">"author"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/root"</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Administrator"</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">      </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Omnis vero earum sunt corporis dolor et placeat."</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">      </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">      </span><span class="s2">"assignees"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[{</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/lennie"</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lennie"</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Dr. Luella Kovacek"</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">      </span><span class="p">}],</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">      </span><span class="s2">"assignee"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/lennie"</span><span class="p">,</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lennie"</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Dr. Luella Kovacek"</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">      </span><span class="s2">"labels"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC43" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span></span>
+<span id="LC44" class="line" lang="json"><span class="w">      </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Ut commodi ullam eos dolores perferendis nihil sunt."</span><span class="p">,</span></span>
+<span id="LC45" class="line" lang="json"><span class="w">      </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:46.176Z"</span><span class="p">,</span></span>
+<span id="LC46" class="line" lang="json"><span class="w">      </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:46.176Z"</span><span class="p">,</span></span>
+<span id="LC47" class="line" lang="json"><span class="w">      </span><span class="s2">"closed_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC48" class="line" lang="json"><span class="w">      </span><span class="s2">"user_notes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC49" class="line" lang="json"><span class="w">      </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC50" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/1"</span><span class="p">,</span></span>
+<span id="LC51" class="line" lang="json"><span class="w">      </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC52" class="line" lang="json"><span class="w">         </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC53" class="line" lang="json"><span class="w">         </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC54" class="line" lang="json"><span class="w">         </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC55" class="line" lang="json"><span class="w">         </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC56" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC57" class="line" lang="json"><span class="w">      </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC58" class="line" lang="json"><span class="w">      </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></span>
+<span id="LC59" class="line" lang="json"><span class="w">   </span><span class="p">}</span></span>
+<span id="LC60" class="line" lang="json"><span class="p">]</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-list-project-issues" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#list-project-issues" aria-hidden="true"></a>List project issues</h2>
+
+<p dir="auto">Get a list of a project's issues.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">GET /projects/:id/issues</span>
+<span id="LC2" class="line" lang="plaintext">GET /projects/:id/issues?state=opened</span>
+<span id="LC3" class="line" lang="plaintext">GET /projects/:id/issues?state=closed</span>
+<span id="LC4" class="line" lang="plaintext">GET /projects/:id/issues?labels=foo</span>
+<span id="LC5" class="line" lang="plaintext">GET /projects/:id/issues?labels=foo,bar</span>
+<span id="LC6" class="line" lang="plaintext">GET /projects/:id/issues?labels=foo,bar&amp;state=opened</span>
+<span id="LC7" class="line" lang="plaintext">GET /projects/:id/issues?milestone=1.0.0</span>
+<span id="LC8" class="line" lang="plaintext">GET /projects/:id/issues?milestone=1.0.0&amp;state=opened</span>
+<span id="LC9" class="line" lang="plaintext">GET /projects/:id/issues?iids[]=42&amp;iids[]=43</span>
+<span id="LC10" class="line" lang="plaintext">GET /projects/:id/issues?search=issue+title+or+description</span>
+<span id="LC11" class="line" lang="plaintext">GET /projects/:id/issues?author_id=5</span>
+<span id="LC12" class="line" lang="plaintext">GET /projects/:id/issues?assignee_id=5</span>
+<span id="LC13" class="line" lang="plaintext">GET /projects/:id/issues?my_reaction_emoji=star</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>iids[]</code></td>
+<td>Array[integer]</td>
+<td>no</td>
+<td>Return only the milestone having the given <code>iid</code>
+</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return all issues or just those that are <code>opened</code> or <code>closed</code>
+</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>string</td>
+<td>no</td>
+<td>Comma-separated list of label names, issues must have all labels to be returned. <code>No+Label</code> lists all issues with no labels</td>
+</tr>
+<tr>
+<td><code>milestone</code></td>
+<td>string</td>
+<td>no</td>
+<td>The milestone title</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues for the given scope: <code>created-by-me</code>, <code>assigned-to-me</code> or <code>all</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>author_id</code></td>
+<td>integer</td>
+<td>no</td>
+<td>Return issues created by the given user <code>id</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>assignee_id</code></td>
+<td>integer</td>
+<td>no</td>
+<td>Return issues assigned to the given user <code>id</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/13004" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 9.5)</em>
+</td>
+</tr>
+<tr>
+<td><code>my_reaction_emoji</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues reacted by the authenticated user by the given <code>emoji</code> <em>(<a href="https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/14016" rel="nofollow noreferrer noopener" target="_blank">Introduced</a> in GitLab 10.0)</em>
+</td>
+</tr>
+<tr>
+<td><code>order_by</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues ordered by <code>created_at</code> or <code>updated_at</code> fields. Default is <code>created_at</code>
+</td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>string</td>
+<td>no</td>
+<td>Return issues sorted in <code>asc</code> or <code>desc</code> order. Default is <code>desc</code>
+</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td>string</td>
+<td>no</td>
+<td>Search project issues against their <code>title</code> and <code>description</code>
+</td>
+</tr>
+<tr>
+<td><code>created_after</code></td>
+<td>datetime</td>
+<td>no</td>
+<td>Return issues created after the given time (inclusive)</td>
+</tr>
+<tr>
+<td><code>created_before</code></td>
+<td>datetime</td>
+<td>no</td>
+<td>Return issues created before the given time (inclusive)</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/4/issues</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">[</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">   </span><span class="p">{</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">      </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">      </span><span class="s2">"milestone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">         </span><span class="s2">"due_date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">         </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">         </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Rerum est voluptatem provident consequuntur molestias similique ipsum dolor."</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">         </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">         </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v3.0"</span><span class="p">,</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">         </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:39.788Z"</span><span class="p">,</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">         </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:39.788Z"</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">      </span><span class="s2">"author"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/root"</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Administrator"</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">      </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Omnis vero earum sunt corporis dolor et placeat."</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">      </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">      </span><span class="s2">"assignees"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[{</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/lennie"</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lennie"</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Dr. Luella Kovacek"</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">      </span><span class="p">}],</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">      </span><span class="s2">"assignee"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">         </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">         </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/lennie"</span><span class="p">,</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">         </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">         </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lennie"</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">         </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">         </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Dr. Luella Kovacek"</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">      </span><span class="s2">"labels"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC43" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span></span>
+<span id="LC44" class="line" lang="json"><span class="w">      </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Ut commodi ullam eos dolores perferendis nihil sunt."</span><span class="p">,</span></span>
+<span id="LC45" class="line" lang="json"><span class="w">      </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:46.176Z"</span><span class="p">,</span></span>
+<span id="LC46" class="line" lang="json"><span class="w">      </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:46.176Z"</span><span class="p">,</span></span>
+<span id="LC47" class="line" lang="json"><span class="w">      </span><span class="s2">"closed_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-05T15:31:46.176Z"</span><span class="p">,</span></span>
+<span id="LC48" class="line" lang="json"><span class="w">      </span><span class="s2">"user_notes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC49" class="line" lang="json"><span class="w">      </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-22"</span><span class="p">,</span></span>
+<span id="LC50" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/1"</span><span class="p">,</span></span>
+<span id="LC51" class="line" lang="json"><span class="w">      </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC52" class="line" lang="json"><span class="w">         </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC53" class="line" lang="json"><span class="w">         </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC54" class="line" lang="json"><span class="w">         </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC55" class="line" lang="json"><span class="w">         </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC56" class="line" lang="json"><span class="w">      </span><span class="p">},</span></span>
+<span id="LC57" class="line" lang="json"><span class="w">      </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC58" class="line" lang="json"><span class="w">      </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></span>
+<span id="LC59" class="line" lang="json"><span class="w">   </span><span class="p">}</span></span>
+<span id="LC60" class="line" lang="json"><span class="p">]</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-single-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#single-issue" aria-hidden="true"></a>Single issue</h2>
+
+<p dir="auto">Get a single project issue.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">GET /projects/:id/issues/:issue_iid</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/4/issues/41</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">   </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">   </span><span class="s2">"milestone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">      </span><span class="s2">"due_date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">      </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">      </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Rerum est voluptatem provident consequuntur molestias similique ipsum dolor."</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">      </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">      </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"v3.0"</span><span class="p">,</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">      </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:39.788Z"</span><span class="p">,</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">      </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:39.788Z"</span><span class="p">,</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">      </span><span class="s2">"closed_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-05T15:31:46.176Z"</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">   </span><span class="p">},</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">   </span><span class="s2">"author"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/root"</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Administrator"</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">   </span><span class="p">},</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">   </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Omnis vero earum sunt corporis dolor et placeat."</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">   </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">   </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">   </span><span class="s2">"assignees"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[{</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/lennie"</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lennie"</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Dr. Luella Kovacek"</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">   </span><span class="p">}],</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">   </span><span class="s2">"assignee"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/lennie"</span><span class="p">,</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"lennie"</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Dr. Luella Kovacek"</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">   </span><span class="p">},</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">   </span><span class="s2">"labels"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC43" class="line" lang="json"><span class="w">   </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span></span>
+<span id="LC44" class="line" lang="json"><span class="w">   </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Ut commodi ullam eos dolores perferendis nihil sunt."</span><span class="p">,</span></span>
+<span id="LC45" class="line" lang="json"><span class="w">   </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:46.176Z"</span><span class="p">,</span></span>
+<span id="LC46" class="line" lang="json"><span class="w">   </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-04T15:31:46.176Z"</span><span class="p">,</span></span>
+<span id="LC47" class="line" lang="json"><span class="w">   </span><span class="s2">"subscribed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC48" class="line" lang="json"><span class="w">   </span><span class="s2">"user_notes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC49" class="line" lang="json"><span class="w">   </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC50" class="line" lang="json"><span class="w">   </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/1"</span><span class="p">,</span></span>
+<span id="LC51" class="line" lang="json"><span class="w">   </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC52" class="line" lang="json"><span class="w">      </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC53" class="line" lang="json"><span class="w">      </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC54" class="line" lang="json"><span class="w">      </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC55" class="line" lang="json"><span class="w">      </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC56" class="line" lang="json"><span class="w">   </span><span class="p">},</span></span>
+<span id="LC57" class="line" lang="json"><span class="w">   </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC58" class="line" lang="json"><span class="w">   </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC59" class="line" lang="json"><span class="w">   </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC60" class="line" lang="json"><span class="w">      </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2"</span><span class="p">,</span></span>
+<span id="LC61" class="line" lang="json"><span class="w">      </span><span class="s2">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/notes"</span><span class="p">,</span></span>
+<span id="LC62" class="line" lang="json"><span class="w">      </span><span class="s2">"award_emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/award_emoji"</span><span class="p">,</span></span>
+<span id="LC63" class="line" lang="json"><span class="w">      </span><span class="s2">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1"</span></span>
+<span id="LC64" class="line" lang="json"><span class="w">   </span><span class="p">}</span></span>
+<span id="LC65" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-new-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#new-issue" aria-hidden="true"></a>New issue</h2>
+
+<p dir="auto">Creates a new project issue.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The title of an issue</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>The description of an issue</td>
+</tr>
+<tr>
+<td><code>confidential</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Set an issue to be confidential. Default is <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>assignee_ids</code></td>
+<td>Array[integer]</td>
+<td>no</td>
+<td>The ID of the users to assign issue</td>
+</tr>
+<tr>
+<td><code>milestone_id</code></td>
+<td>integer</td>
+<td>no</td>
+<td>The ID of a milestone to assign issue</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>string</td>
+<td>no</td>
+<td>Comma-separated label names for an issue</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>string</td>
+<td>no</td>
+<td>Date time string, ISO 8601 formatted, e.g. <code>2016-03-11T03:45:40Z</code> (requires admin or project owner rights)</td>
+</tr>
+<tr>
+<td><code>due_date</code></td>
+<td>string</td>
+<td>no</td>
+<td>Date time string in the format YEAR-MONTH-DAY, e.g. <code>2016-03-11</code>
+</td>
+</tr>
+<tr>
+<td><code>merge_request_to_resolve_discussions_of</code></td>
+<td>integer</td>
+<td>no</td>
+<td>The IID of a merge request in which to resolve all issues. This will fill the issue with a default description and mark all discussions as resolved. When passing a description or title, these values will take precedence over the default values.</td>
+</tr>
+<tr>
+<td><code>discussion_to_resolve</code></td>
+<td>string</td>
+<td>no</td>
+<td>The ID of a discussion to resolve. This will fill in the issue with a default description and mark the discussion as resolved. Use in combination with <code>merge_request_to_resolve_discussions_of</code>.</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/4/issues?title<span class="o">=</span>Issues%20with%20auth&amp;labels<span class="o">=</span>bug</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">   </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">   </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">   </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-07T12:44:33.959Z"</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">   </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">   </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Issues with auth"</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">   </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">   </span><span class="s2">"assignees"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">   </span><span class="s2">"assignee"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">   </span><span class="s2">"labels"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">      </span><span class="s2">"bug"</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">   </span><span class="p">],</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">   </span><span class="s2">"author"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Alexandra Bashirian"</span><span class="p">,</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/eileen.lowe"</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"eileen.lowe"</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">   </span><span class="p">},</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">   </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">   </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-07T12:44:33.959Z"</span><span class="p">,</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">   </span><span class="s2">"closed_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">   </span><span class="s2">"milestone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">   </span><span class="s2">"subscribed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">   </span><span class="s2">"user_notes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">   </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">   </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/14"</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">   </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">      </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">      </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">      </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">      </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">   </span><span class="p">},</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">   </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">   </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">   </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">      </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2"</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">      </span><span class="s2">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/notes"</span><span class="p">,</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">      </span><span class="s2">"award_emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/award_emoji"</span><span class="p">,</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">      </span><span class="s2">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1"</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">   </span><span class="p">}</span></span>
+<span id="LC43" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-edit-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#edit-issue" aria-hidden="true"></a>Edit issue</h2>
+
+<p dir="auto">Updates an existing project issue. This call is also used to mark an issue as
+closed.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">PUT /projects/:id/issues/:issue_iid</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>string</td>
+<td>no</td>
+<td>The title of an issue</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>no</td>
+<td>The description of an issue</td>
+</tr>
+<tr>
+<td><code>confidential</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Updates an issue to be confidential</td>
+</tr>
+<tr>
+<td><code>assignee_ids</code></td>
+<td>Array[integer]</td>
+<td>no</td>
+<td>The ID of the users to assign the issue to</td>
+</tr>
+<tr>
+<td><code>milestone_id</code></td>
+<td>integer</td>
+<td>no</td>
+<td>The ID of a milestone to assign the issue to</td>
+</tr>
+<tr>
+<td><code>labels</code></td>
+<td>string</td>
+<td>no</td>
+<td>Comma-separated label names for an issue</td>
+</tr>
+<tr>
+<td><code>state_event</code></td>
+<td>string</td>
+<td>no</td>
+<td>The state event of an issue. Set <code>close</code> to close the issue and <code>reopen</code> to reopen it</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>string</td>
+<td>no</td>
+<td>Date time string, ISO 8601 formatted, e.g. <code>2016-03-11T03:45:40Z</code> (requires admin or project owner rights)</td>
+</tr>
+<tr>
+<td><code>due_date</code></td>
+<td>string</td>
+<td>no</td>
+<td>Date time string in the format YEAR-MONTH-DAY, e.g. <code>2016-03-11</code>
+</td>
+</tr>
+<tr>
+<td><code>discussion_locked</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Flag indicating if the issue's discussion is locked. If the discussion is locked only project members can add or edit comments.</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> PUT <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/4/issues/85?state_event<span class="o">=</span>close</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">   </span><span class="s2">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-07T12:46:01.410Z"</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">   </span><span class="s2">"author"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Alexandra Bashirian"</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"eileen.lowe"</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/eileen.lowe"</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">   </span><span class="p">},</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">   </span><span class="s2">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">   </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Issues with auth"</span><span class="p">,</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">   </span><span class="s2">"project_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">   </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">   </span><span class="s2">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-07T12:55:16.213Z"</span><span class="p">,</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">   </span><span class="s2">"closed_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-01-08T12:55:16.213Z"</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">   </span><span class="s2">"iid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">   </span><span class="s2">"labels"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">      </span><span class="s2">"bug"</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">   </span><span class="p">],</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">   </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">   </span><span class="s2">"assignees"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">   </span><span class="s2">"assignee"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">   </span><span class="s2">"milestone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">   </span><span class="s2">"subscribed"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">   </span><span class="s2">"user_notes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">   </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-22"</span><span class="p">,</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">   </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/15"</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">   </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">      </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">      </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">      </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">      </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">   </span><span class="p">},</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">   </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">   </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">   </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">      </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2"</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">      </span><span class="s2">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/notes"</span><span class="p">,</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">      </span><span class="s2">"award_emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/award_emoji"</span><span class="p">,</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">      </span><span class="s2">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1"</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">   </span><span class="p">}</span></span>
+<span id="LC43" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-delete-an-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#delete-an-issue" aria-hidden="true"></a>Delete an issue</h2>
+
+<p dir="auto">Only for admins and project owners. Soft deletes the issue in question.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">DELETE /projects/:id/issues/:issue_iid</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> DELETE <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/4/issues/85</span></code></pre>
+<h2 dir="auto">
+<a id="user-content-move-an-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#move-an-issue" aria-hidden="true"></a>Move an issue</h2>
+
+<p dir="auto">Moves an issue to a different project. If the target project
+equals the source project or the user has insufficient permissions to move an
+issue, error <code>400</code> together with an explaining error message is returned.</p>
+
+<p dir="auto">If a given label and/or milestone with the same name also exists in the target
+project, it will then be assigned to the issue that is being moved.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues/:issue_iid/move</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+<tr>
+<td><code>to_project_id</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The ID of the new project</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> <span class="nt">--data</span> <span class="s1">'{"to_project_id": 5}'</span> https://gitlab.example.com/api/v4/projects/4/issues/85/move</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"iid"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sit voluptas tempora quisquam aut doloribus et."</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repellat voluptas quibusdam voluptatem exercitationem."</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-05T21:41:45.652Z"</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-07T12:20:17.596Z"</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">  </span><span class="s2">"closed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">  </span><span class="s2">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">  </span><span class="s2">"milestone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">  </span><span class="s2">"assignees"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Miss Monserrate Beier"</span><span class="p">,</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"axel.block"</span><span class="p">,</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/46f6f7dc858ada7be1853f7fb96e81da?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/axel.block"</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">  </span><span class="p">}],</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">  </span><span class="s2">"assignee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Miss Monserrate Beier"</span><span class="p">,</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"axel.block"</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/46f6f7dc858ada7be1853f7fb96e81da?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/axel.block"</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">  </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kris Steuber"</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"solon.cremin"</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/7a190fecbaa68212a4b68aeb6e3acd10?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/solon.cremin"</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">  </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">  </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/11"</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">  </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">    </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">    </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">    </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC43" class="line" lang="json"><span class="w">    </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC44" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC45" class="line" lang="json"><span class="w">  </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC46" class="line" lang="json"><span class="w">  </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC47" class="line" lang="json"><span class="w">  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC48" class="line" lang="json"><span class="w">    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2"</span><span class="p">,</span></span>
+<span id="LC49" class="line" lang="json"><span class="w">    </span><span class="s2">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/notes"</span><span class="p">,</span></span>
+<span id="LC50" class="line" lang="json"><span class="w">    </span><span class="s2">"award_emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/award_emoji"</span><span class="p">,</span></span>
+<span id="LC51" class="line" lang="json"><span class="w">    </span><span class="s2">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1"</span></span>
+<span id="LC52" class="line" lang="json"><span class="w">  </span><span class="p">}</span></span>
+<span id="LC53" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-subscribe-to-an-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#subscribe-to-an-issue" aria-hidden="true"></a>Subscribe to an issue</h2>
+
+<p dir="auto">Subscribes the authenticated user to an issue to receive notifications.
+If the user is already subscribed to the issue, the status code <code>304</code>
+is returned.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues/:issue_iid/subscribe</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/subscribe</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"iid"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sit voluptas tempora quisquam aut doloribus et."</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repellat voluptas quibusdam voluptatem exercitationem."</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-05T21:41:45.652Z"</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-07T12:20:17.596Z"</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">  </span><span class="s2">"closed_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">  </span><span class="s2">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">  </span><span class="s2">"milestone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">  </span><span class="s2">"assignees"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Miss Monserrate Beier"</span><span class="p">,</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"axel.block"</span><span class="p">,</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/46f6f7dc858ada7be1853f7fb96e81da?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/axel.block"</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">  </span><span class="p">}],</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">  </span><span class="s2">"assignee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Miss Monserrate Beier"</span><span class="p">,</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"axel.block"</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/46f6f7dc858ada7be1853f7fb96e81da?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/axel.block"</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">  </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kris Steuber"</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"solon.cremin"</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/7a190fecbaa68212a4b68aeb6e3acd10?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/solon.cremin"</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">  </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">  </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/11"</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">  </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">    </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">    </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">    </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC43" class="line" lang="json"><span class="w">    </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC44" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC45" class="line" lang="json"><span class="w">  </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC46" class="line" lang="json"><span class="w">  </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC47" class="line" lang="json"><span class="w">  </span><span class="s2">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC48" class="line" lang="json"><span class="w">    </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2"</span><span class="p">,</span></span>
+<span id="LC49" class="line" lang="json"><span class="w">    </span><span class="s2">"notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/notes"</span><span class="p">,</span></span>
+<span id="LC50" class="line" lang="json"><span class="w">    </span><span class="s2">"award_emoji"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1/issues/2/award_emoji"</span><span class="p">,</span></span>
+<span id="LC51" class="line" lang="json"><span class="w">    </span><span class="s2">"project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/api/v4/projects/1"</span></span>
+<span id="LC52" class="line" lang="json"><span class="w">  </span><span class="p">}</span></span>
+<span id="LC53" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-unsubscribe-from-an-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#unsubscribe-from-an-issue" aria-hidden="true"></a>Unsubscribe from an issue</h2>
+
+<p dir="auto">Unsubscribes the authenticated user from the issue to not receive notifications
+from it. If the user is not subscribed to the issue, the
+status code <code>304</code> is returned.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues/:issue_iid/unsubscribe</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/unsubscribe</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">93</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"iid"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">  </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Incidunt et rerum ea expedita iure quibusdam."</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Et cumque architecto sed aut ipsam."</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-05T21:41:45.217Z"</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-07T13:02:37.905Z"</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">  </span><span class="s2">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">  </span><span class="s2">"milestone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">  </span><span class="s2">"assignee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Edwardo Grady"</span><span class="p">,</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"keyon"</span><span class="p">,</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/3e6f06a86cf27fa8b56f3f74f7615987?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/keyon"</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">  </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vivian Hermann"</span><span class="p">,</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orville"</span><span class="p">,</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/5224fd70153710e92fb8bcf79ac29d67?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/orville"</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">  </span><span class="s2">"subscribed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">  </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">  </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/12"</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">  </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">  </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></span>
+<span id="LC33" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<h2 dir="auto">
+<a id="user-content-create-a-todo" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#create-a-todo" aria-hidden="true"></a>Create a todo</h2>
+
+<p dir="auto">Manually creates a todo for the current user on an issue. If
+there already exists a todo for the user on that issue, status code <code>304</code> is
+returned.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues/:issue_iid/todo</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/todo</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">112</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gitlab Ci"</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">    </span><span class="s2">"name_with_namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gitlab Org / Gitlab Ci"</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">    </span><span class="s2">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gitlab-ci"</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">    </span><span class="s2">"path_with_namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gitlab-org/gitlab-ci"</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">  </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Administrator"</span><span class="p">,</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">    </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/root"</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">  </span><span class="s2">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"marked"</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">  </span><span class="s2">"target_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Issue"</span><span class="p">,</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">  </span><span class="s2">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">93</span><span class="p">,</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">    </span><span class="s2">"iid"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">    </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vel voluptas atque dicta mollitia adipisci qui at."</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tempora laboriosam sint magni sed voluptas similique."</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-17T07:47:39.486Z"</span><span class="p">,</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-01T11:09:13.998Z"</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">    </span><span class="s2">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">    </span><span class="s2">"milestone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">      </span><span class="s2">"iid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">      </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v0.0"</span><span class="p">,</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accusantium nostrum rerum quae quia quis nesciunt suscipit id."</span><span class="p">,</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-17T07:47:33.832Z"</span><span class="p">,</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-17T07:47:33.832Z"</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">      </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">    </span><span class="p">},</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">    </span><span class="s2">"assignees"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jarret O'Keefe"</span><span class="p">,</span></span>
+<span id="LC43" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"francisca"</span><span class="p">,</span></span>
+<span id="LC44" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span></span>
+<span id="LC45" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC46" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/a7fa515d53450023c83d62986d0658a8?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC47" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/francisca"</span></span>
+<span id="LC48" class="line" lang="json"><span class="w">    </span><span class="p">}],</span></span>
+<span id="LC49" class="line" lang="json"><span class="w">    </span><span class="s2">"assignee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC50" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jarret O'Keefe"</span><span class="p">,</span></span>
+<span id="LC51" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"francisca"</span><span class="p">,</span></span>
+<span id="LC52" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span></span>
+<span id="LC53" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC54" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/a7fa515d53450023c83d62986d0658a8?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC55" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/francisca"</span></span>
+<span id="LC56" class="line" lang="json"><span class="w">    </span><span class="p">},</span></span>
+<span id="LC57" class="line" lang="json"><span class="w">    </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC58" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maxie Medhurst"</span><span class="p">,</span></span>
+<span id="LC59" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"craig_rutherford"</span><span class="p">,</span></span>
+<span id="LC60" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span></span>
+<span id="LC61" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC62" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/a0d477b3ea21970ce6ffcbb817b0b435?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC63" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/craig_rutherford"</span></span>
+<span id="LC64" class="line" lang="json"><span class="w">    </span><span class="p">},</span></span>
+<span id="LC65" class="line" lang="json"><span class="w">    </span><span class="s2">"subscribed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span></span>
+<span id="LC66" class="line" lang="json"><span class="w">    </span><span class="s2">"user_notes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span></span>
+<span id="LC67" class="line" lang="json"><span class="w">    </span><span class="s2">"upvotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC68" class="line" lang="json"><span class="w">    </span><span class="s2">"downvotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC69" class="line" lang="json"><span class="w">    </span><span class="s2">"due_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC70" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/example/example/issues/110"</span><span class="p">,</span></span>
+<span id="LC71" class="line" lang="json"><span class="w">    </span><span class="s2">"confidential"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC72" class="line" lang="json"><span class="w">    </span><span class="s2">"discussion_locked"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></span>
+<span id="LC73" class="line" lang="json"><span class="w">  </span><span class="p">},</span></span>
+<span id="LC74" class="line" lang="json"><span class="w">  </span><span class="s2">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/gitlab-org/gitlab-ci/issues/10"</span><span class="p">,</span></span>
+<span id="LC75" class="line" lang="json"><span class="w">  </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vel voluptas atque dicta mollitia adipisci qui at."</span><span class="p">,</span></span>
+<span id="LC76" class="line" lang="json"><span class="w">  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span></span>
+<span id="LC77" class="line" lang="json"><span class="w">  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-01T11:09:13.992Z"</span></span>
+<span id="LC78" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<p dir="auto"><strong>Note</strong>: <code>assignee</code> column is deprecated, now we show it as a single-sized array <code>assignees</code> to conform to the GitLab EE API.</p>
+
+<h2 dir="auto">
+<a id="user-content-set-a-time-estimate-for-an-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#set-a-time-estimate-for-an-issue" aria-hidden="true"></a>Set a time estimate for an issue</h2>
+
+<p dir="auto">Sets an estimated time of work for this issue.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues/:issue_iid/time_estimate</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The duration in human format. e.g: 3h30m</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/time_estimate?duration<span class="o">=</span>3h30m</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3h 30m"</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">12600</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">  </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span></span>
+<span id="LC6" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<h2 dir="auto">
+<a id="user-content-reset-the-time-estimate-for-an-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#reset-the-time-estimate-for-an-issue" aria-hidden="true"></a>Reset the time estimate for an issue</h2>
+
+<p dir="auto">Resets the estimated time for this issue to 0 seconds.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues/:issue_iid/reset_time_estimate</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/reset_time_estimate</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">  </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span></span>
+<span id="LC6" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<h2 dir="auto">
+<a id="user-content-add-spent-time-for-an-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#add-spent-time-for-an-issue" aria-hidden="true"></a>Add spent time for an issue</h2>
+
+<p dir="auto">Adds spent time for this issue</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues/:issue_iid/add_spent_time</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The duration in human format. e.g: 3h30m</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/add_spent_time?duration<span class="o">=</span>1h</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1h"</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">  </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span></span>
+<span id="LC6" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<h2 dir="auto">
+<a id="user-content-reset-spent-time-for-an-issue" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#reset-spent-time-for-an-issue" aria-hidden="true"></a>Reset spent time for an issue</h2>
+
+<p dir="auto">Resets the total spent time for this issue to 0 seconds.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">POST /projects/:id/issues/:issue_iid/reset_spent_time</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> POST <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/reset_spent_time</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">  </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span></span>
+<span id="LC6" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<h2 dir="auto">
+<a id="user-content-get-time-tracking-stats" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#get-time-tracking-stats" aria-hidden="true"></a>Get time tracking stats</h2>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">GET /projects/:id/issues/:issue_iid/time_stats</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> GET <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/time_stats</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2h"</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1h"</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">7200</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">  </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span></span>
+<span id="LC6" class="line" lang="json"><span class="p">}</span></span></code></pre>
+<h2 dir="auto">
+<a id="user-content-list-merge-requests-that-will-close-issue-on-merge" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#list-merge-requests-that-will-close-issue-on-merge" aria-hidden="true"></a>List merge requests that will close issue on merge</h2>
+
+<p dir="auto">Get all the merge requests that will close issue when merged.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">GET /projects/:id/issues/:issue_iid/closed_by</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The ID of a project</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/1/issues/11/closed_by</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">[</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="p">{</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6471</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">    </span><span class="s2">"iid"</span><span class="p">:</span><span class="w"> </span><span class="mi">6432</span><span class="p">,</span></span>
+<span id="LC5" class="line" lang="json"><span class="w">    </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC6" class="line" lang="json"><span class="w">    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"add a test for cgi lexer options"</span><span class="p">,</span></span>
+<span id="LC7" class="line" lang="json"><span class="w">    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closes #11"</span><span class="p">,</span></span>
+<span id="LC8" class="line" lang="json"><span class="w">    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opened"</span><span class="p">,</span></span>
+<span id="LC9" class="line" lang="json"><span class="w">    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-04-06T18:33:34.168Z"</span><span class="p">,</span></span>
+<span id="LC10" class="line" lang="json"><span class="w">    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-04-09T20:10:24.983Z"</span><span class="p">,</span></span>
+<span id="LC11" class="line" lang="json"><span class="w">    </span><span class="s2">"target_branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span></span>
+<span id="LC12" class="line" lang="json"><span class="w">    </span><span class="s2">"source_branch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"feature.custom-highlighting"</span><span class="p">,</span></span>
+<span id="LC13" class="line" lang="json"><span class="w">    </span><span class="s2">"upvotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC14" class="line" lang="json"><span class="w">    </span><span class="s2">"downvotes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC15" class="line" lang="json"><span class="w">    </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC16" class="line" lang="json"><span class="w">      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Administrator"</span><span class="p">,</span></span>
+<span id="LC17" class="line" lang="json"><span class="w">      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"root"</span><span class="p">,</span></span>
+<span id="LC18" class="line" lang="json"><span class="w">      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC19" class="line" lang="json"><span class="w">      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span></span>
+<span id="LC20" class="line" lang="json"><span class="w">      </span><span class="s2">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?s=80&amp;d=identicon"</span><span class="p">,</span></span>
+<span id="LC21" class="line" lang="json"><span class="w">      </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/root"</span></span>
+<span id="LC22" class="line" lang="json"><span class="w">    </span><span class="p">},</span></span>
+<span id="LC23" class="line" lang="json"><span class="w">    </span><span class="s2">"assignee"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC24" class="line" lang="json"><span class="w">    </span><span class="s2">"source_project_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC25" class="line" lang="json"><span class="w">    </span><span class="s2">"target_project_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC26" class="line" lang="json"><span class="w">    </span><span class="s2">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></span>
+<span id="LC27" class="line" lang="json"><span class="w">    </span><span class="s2">"work_in_progress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC28" class="line" lang="json"><span class="w">    </span><span class="s2">"milestone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC29" class="line" lang="json"><span class="w">    </span><span class="s2">"merge_when_pipeline_succeeds"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC30" class="line" lang="json"><span class="w">    </span><span class="s2">"merge_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unchecked"</span><span class="p">,</span></span>
+<span id="LC31" class="line" lang="json"><span class="w">    </span><span class="s2">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a62481d563af92b8e32d735f2fa63b94e806835"</span><span class="p">,</span></span>
+<span id="LC32" class="line" lang="json"><span class="w">    </span><span class="s2">"merge_commit_sha"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC33" class="line" lang="json"><span class="w">    </span><span class="s2">"user_notes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></span>
+<span id="LC34" class="line" lang="json"><span class="w">    </span><span class="s2">"should_remove_source_branch"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC35" class="line" lang="json"><span class="w">    </span><span class="s2">"force_remove_source_branch"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></span>
+<span id="LC36" class="line" lang="json"><span class="w">    </span><span class="s2">"web_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gitlab.example.com/gitlab-org/gitlab-test/merge_requests/6432"</span><span class="p">,</span></span>
+<span id="LC37" class="line" lang="json"><span class="w">    </span><span class="s2">"time_stats"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span id="LC38" class="line" lang="json"><span class="w">      </span><span class="s2">"time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC39" class="line" lang="json"><span class="w">      </span><span class="s2">"total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></span>
+<span id="LC40" class="line" lang="json"><span class="w">      </span><span class="s2">"human_time_estimate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></span>
+<span id="LC41" class="line" lang="json"><span class="w">      </span><span class="s2">"human_total_time_spent"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span></span>
+<span id="LC42" class="line" lang="json"><span class="w">    </span><span class="p">}</span></span>
+<span id="LC43" class="line" lang="json"><span class="w">  </span><span class="p">}</span></span>
+<span id="LC44" class="line" lang="json"><span class="p">]</span></span></code></pre>
+<h2 dir="auto">
+<a id="user-content-comments-on-issues" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#comments-on-issues" aria-hidden="true"></a>Comments on issues</h2>
+
+<p dir="auto">Comments are done via the <a href="http://gitlab.cobanc.cl/help/api/notes.md">notes</a> resource.</p>
+
+<h2 dir="auto">
+<a id="user-content-get-user-agent-details" class="anchor" href="http://gitlab.cobanc.cl/help/api/issues.md#get-user-agent-details" aria-hidden="true"></a>Get user agent details</h2>
+
+<p dir="auto">Available only for admins.</p>
+
+<pre class="code highlight js-syntax-highlight plaintext white" lang="plaintext" v-pre="true"><code><span id="LC1" class="line" lang="plaintext">GET /projects/:id/issues/:issue_iid/user_agent_detail</span></code></pre>
+<table dir="auto">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer/string</td>
+<td>yes</td>
+<td>The ID or <a href="http://gitlab.cobanc.cl/help/api/README.md#namespaced-path-encoding">URL-encoded path of the project</a> owned by the authenticated user</td>
+</tr>
+<tr>
+<td><code>issue_iid</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>The internal ID of a project's issue</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="code highlight js-syntax-highlight shell white" lang="shell" v-pre="true"><code><span id="LC1" class="line" lang="shell">curl <span class="nt">--request</span> GET <span class="nt">--header</span> <span class="s2">"PRIVATE-TOKEN: 9koXpg98eAheJpvBs5tK"</span> https://gitlab.example.com/api/v4/projects/5/issues/93/user_agent_detail</span></code></pre>
+<p dir="auto">Example response:</p>
+
+<pre class="code highlight js-syntax-highlight json white" lang="json" v-pre="true"><code><span id="LC1" class="line" lang="json"><span class="p">{</span></span>
+<span id="LC2" class="line" lang="json"><span class="w">  </span><span class="s2">"user_agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AppleWebKit/537.36"</span><span class="p">,</span></span>
+<span id="LC3" class="line" lang="json"><span class="w">  </span><span class="s2">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="p">,</span></span>
+<span id="LC4" class="line" lang="json"><span class="w">  </span><span class="s2">"akismet_submitted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></span>
+<span id="LC5" class="line" lang="json"><span class="p">}</span></span></code></pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+</body></html>
