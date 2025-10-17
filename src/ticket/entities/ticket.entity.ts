@@ -45,6 +45,7 @@ export class Ticket {
      */
     @Column({
         type: 'text',
+        comment: 'descripcion del ticket',
     })
     descripcion: string;
 
@@ -83,4 +84,19 @@ export class Ticket {
      */
     @DeleteDateColumn()
     deleted_at: Date;
+
+    @Column({ name: 'id_estado', type: 'int', comment: 'esta actual del ticket utl_subtipos' })
+    id_estado: number;
+
+    @Column({ type: 'varchar', length: 150, comment: 'titulo principal del ticket' })
+    titulo: string;
+
+    @Column({ name: 'fecha_estimada', type: 'timestamptz', nullable: true, comment: 'fecha de estima de resolucion' })
+    fecha_estimada: Date;
+
+    @Column({ name: 'fecha_clasificacion', type: 'timestamptz', nullable: true, comment: 'fecha de en que fue clasificado' })
+    fecha_clasificacion: Date;
+
+    @Column({ name: 'numero_issue', type: 'varchar', length: 20, nullable: true, comment: 'Número de issue asignado al ticket' })
+    numero_issue: string;
 }

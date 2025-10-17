@@ -1,7 +1,11 @@
-import { Controller, Post, Get, Query, Logger } from '@nestjs/common';
+import { Controller, Post, Get, Query, Logger, UseGuards, HttpException, HttpStatus, Body } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { GestionCobancMigrationService } from '../services/gestion-cobanc-migration.service';
+import { PermissionsGuard } from 'src/auth/guards/permissions.guard';
+import { MigrateOneTicketDto } from '../dtos/local-general.dto';
 
 @Controller('migration')
+@UseGuards(AuthGuard('jwt'), PermissionsGuard)
 export class MigrationController {
     private readonly logger = new Logger(MigrationController.name);
 
@@ -10,6 +14,38 @@ export class MigrationController {
     /**
      * Ejecuta la migración de tickets desde gestion_coban a la tabla local
      * GET /migration/tickets?fechaDesde=2024-01-01&fechaHasta=2024-12-31&estado=activo&ticketId=123
+     */
+    @Post('take-one-ticket')
+    async takeOneTicketMigration(
+        @Body() body : MigrateOneTicketDto
+    ) {
+        try {
+            this.logger.log('Iniciando migración de un solo ticket...');
+
+            const ticket = await this.gestionCobancMigrationService.migrateOneTicket(body.ticketId);
+
+            return {
+                success: true,
+                message: 'Migración de un solo ticket completada exitosamente',
+                ticket,
+            };
+
+        } catch (error) {
+            this.logger.error('Error durante la migración de un solo ticket:', error.message);
+            // Lanzar excepción HTTP en lugar de retornar error
+            throw new HttpException({
+                    success: false,
+                    message: 'Error durante la migración',
+                    error: error.message
+                },
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    /**
+     * 
+     * TODO: implentar permisos para todas las rutas de migración
      */
     @Post('tickets')
     async migrateTickets(

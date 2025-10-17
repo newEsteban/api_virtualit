@@ -14,24 +14,35 @@ export class TblTicketsNews {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', length: 255, nullable: true })
+    @Column({ name: 'id_estado', type: 'int', comment: 'esta actual del ticket utl_subtipos' })
+    id_estado: number;
+
+    @Column({ type: 'varchar', length: 150, comment: 'titulo principal del ticket' })
+    titulo: string;
+
+    @Column({ type: 'text', comment: 'descripcion del ticket' })
     descripcion: string;
 
-    @Column({ type: 'varchar', length: 500, nullable: true })
-    url_ticket: string;
+    @Column({ name: 'fecha_estimada', type: 'timestamp', nullable: true, comment: 'fecha de estima de resolucion' })
+    fecha_estimada: Date;
 
-    @Column({ type: 'int', nullable: true })
-    ticket_id: number;
+    @Column({ name: 'fecha_clasificacion', type: 'timestamp', nullable: true, comment: 'fecha de en que fue clasificado' })
+    fecha_clasificacion: Date;
 
-    @Column({ type: 'varchar', length: 100, nullable: true })
-    estado: string;
 
-    @Column({ type: 'timestamp', nullable: true })
-    fecha_creacion: Date;
+    @Column({ name: 'numero_issue', type: 'varchar', length: 20, nullable: true, comment: 'Número de issue asignado al ticket' })
+    numero_issue: string;
 
-    @Column({ type: 'timestamp', nullable: true })
-    fecha_actualizacion: Date;
 
-    // Agregar más campos según la estructura real de tbl_tickets_news
-    // Esta entidad puede expandirse conforme se identifiquen más campos necesarios
+    @Column({ name: 'created_at', type: 'timestamp', nullable: true })
+    created_at: Date;
+
+    @Column({ name: 'updated_at', type: 'timestamp', nullable: true })
+    updated_at: Date;
+
+    @Column({ name: 'deleted_at', type: 'timestamp', nullable: true })
+    deleted_at: Date;
+
+    @Column({ name: 'tiempo_estimado', type: 'text', nullable: true })
+    tiempo_estimado: string;
 }
