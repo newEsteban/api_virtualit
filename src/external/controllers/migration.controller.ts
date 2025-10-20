@@ -43,6 +43,34 @@ export class MigrationController {
         }
     }
 
+    @Post('update-one-ticket')
+    async updateOneTicketMigration(
+        @Body() body: MigrateOneTicketDto
+    ) {
+        try {
+            this.logger.log('Iniciando actualización de un solo ticket...');
+
+            const ticket = await this.gestionCobancMigrationService.updateOneTicket(body.ticketId, body.updateData);
+
+            return {
+                success: true,
+                message: 'Actualización de un solo ticket completada exitosamente',
+                ticket,
+            };
+
+        } catch (error) {
+            this.logger.error('Error durante la actualización de un solo ticket:', error.message);
+            // Lanzar excepción HTTP en lugar de retornar error
+            throw new HttpException({
+                    success: false,
+                    message: 'Error durante la actualización',
+                    error: error.message
+                },
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
     /**
      * 
      * TODO: implentar permisos para todas las rutas de migración

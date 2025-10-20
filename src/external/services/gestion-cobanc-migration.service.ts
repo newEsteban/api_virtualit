@@ -50,93 +50,6 @@ export class GestionCobancMigrationService {
     }
 
     /**
-     * Migra los datos de tbl_tickets_news (gestion_coban) a la tabla ticket local
-     * @param conditions Condiciones opcionales para filtrar los datos
-     * @returns Número de registros migrados
-     */
-    async migrateTicketsFromGestionCoban(conditions: any = {}): Promise<number> {
-        try {
-            this.checkNewSistemasConnection();
-
-            this.logger.log('🚀 Iniciando migración de tickets desde gestion_coban...');
-
-            // Construir query con condiciones
-            const queryBuilder = this.tblTicketsNewsRepository.createQueryBuilder('tn');
-
-            // Aplicar condiciones si las hay
-            if (conditions.fechaDesde) {
-                queryBuilder.andWhere('tn.created_at >= :fechaDesde', {
-                    fechaDesde: conditions.fechaDesde
-                });
-            }
-
-            if (conditions.fechaHasta) {
-                queryBuilder.andWhere('tn.created_at <= :fechaHasta', {
-                    fechaHasta: conditions.fechaHasta
-                });
-            }
-
-            if (conditions.estado) {
-                queryBuilder.andWhere('tn.id_estado = :estado', {
-                    estado: conditions.estado
-                });
-            }
-
-            if (conditions.ticketId) {
-                queryBuilder.andWhere('tn.id = :ticketId', {
-                    ticketId: conditions.ticketId
-                });
-            }
-
-            // Excluir tickets que ya existen en la tabla local
-            queryBuilder.andWhere(
-                'tn.id NOT IN (SELECT COALESCE(ticket_new_id, 0) FROM ticket WHERE ticket_new_id IS NOT NULL)'
-            );
-
-            const tblTicketsNewsRecords = await queryBuilder.getMany();
-
-            this.logger.log(`📋 Encontrados ${tblTicketsNewsRecords.length} tickets para migrar`);
-
-            let migratedCount = 0;
-
-            for (const ticketRecord of tblTicketsNewsRecords) {
-                try {
-                    // Verificar si el ticket ya existe en la tabla local
-                    const existingTicket = await this.ticketRepository.findOne({
-                        where: { ticket_new_id: ticketRecord.id }
-                    });
-
-                    if (!existingTicket) {
-                        // Crear nuevo ticket
-                        const newTicket = this.ticketRepository.create({
-                            ticket_new_id: ticketRecord.id,
-                            descripcion: ticketRecord.descripcion || 'Sin descripción',
-                            titulo: ticketRecord.titulo,
-                            // Mapear más campos según sea necesario
-                        });
-
-                        await this.ticketRepository.save(newTicket);
-                        migratedCount++;
-
-                        this.logger.debug(`✅ Migrado ticket ID: ${ticketRecord.id}`);
-                    } else {
-                        this.logger.debug(`⏭️ Ticket ID: ${ticketRecord.id} ya existe, omitiendo`);
-                    }
-                } catch (error) {
-                    this.logger.error(`❌ Error migrando ticket ID: ${ticketRecord.id}`, error.message);
-                }
-            }
-
-            this.logger.log(`✅ Migración completada. ${migratedCount} tickets migrados exitosamente`);
-            return migratedCount;
-
-        } catch (error) {
-            this.logger.error('❌ Error durante la migración:', error.message);
-            throw error;
-        }
-    }
-
-    /**
      * Migra un solo ticket específico desde gestion_coban a la tabla local
      * @param ticketId ID del ticket a migrar
      * @returns Datos del ticket migrado o información sobre su estado
@@ -167,9 +80,7 @@ export class GestionCobancMigrationService {
             }
 
             // Verificar si el ticket ya existe en la tabla local
-            const existingTicket = await this.ticketRepository.findOne({
-                where: { ticket_new_id: ticketRecord.id }
-            });
+            const existingTicket = await this.findTicketLocalByGestionCobanId(ticketRecord.id);
 
             if (existingTicket) {
                 this.logger.warn(`⏭️ Ticket ID: ${ticketId} ya existe en la base de datos local`);
@@ -184,18 +95,8 @@ export class GestionCobancMigrationService {
                 };
             }
 
-            // Migrar el ticket
-            const newTicket = this.ticketRepository.create({
-                ticket_new_id: ticketRecord.id,
-                descripcion: ticketRecord.descripcion || 'Sin descripción',
-                titulo: ticketRecord.titulo,
-                id_estado: ticketRecord.id_estado,
-                fecha_estimada: ticketRecord.fecha_estimada,
-                fecha_clasificacion: ticketRecord.fecha_clasificacion,
-                numero_issue: ticketRecord.numero_issue,
-            });
-
-            const savedTicket = await this.ticketRepository.save(newTicket);
+            // Migrar el ticket usando la función reutilizable
+            const savedTicket = await this.createTicketFromExternal(ticketRecord);
 
             this.logger.log(`✅ Ticket ID: ${ticketId} migrado exitosamente como ID local: ${savedTicket.id}`);
 
@@ -220,6 +121,142 @@ export class GestionCobancMigrationService {
         } catch (error) {
             this.logger.error(`❌ Error migrando ticket ID: ${ticketId}`, error.message);
             throw new Error(`Error al migrar ticket ${ticketId}: ${error.message}`);
+        }
+    }
+
+    async updateOneTicket(ticketId: number, updateData: Partial<Ticket>): Promise<Ticket> {
+        try {
+            this.checkNewSistemasConnection();
+
+            this.logger.log(`🔄 Iniciando actualización del ticket ID: ${ticketId}`);
+
+            const ticket = await this.ticketRepository.findOne({ where: { id: ticketId } });
+
+            if (!ticket) {
+                this.logger.warn(`⚠️ Ticket ID: ${ticketId} no encontrado en la base de datos local`);
+                throw new Error(`Ticket con ID ${ticketId} no existe en la base de datos local`);
+            }
+
+            // Actualizar los campos del ticket
+            Object.assign(ticket, updateData);
+
+            const updatedTicket = await this.ticketRepository.save(ticket);
+
+            this.logger.log(`✅ Ticket ID: ${ticketId} actualizado exitosamente`);
+
+            return updatedTicket;
+
+        } catch (error) {
+            this.logger.error(`❌ Error actualizando ticket ID: ${ticketId}`, error.message);
+            throw new Error(`Error al actualizar ticket ${ticketId}: ${error.message}`);
+        }
+    }
+
+    async createOrUpdateTicketFromGestionCoban(ticketId: number): Promise<Ticket> {
+        try {
+            this.checkNewSistemasConnection();
+
+            this.logger.log(`🔄 Creando o actualizando ticket desde gestion_coban ID: ${ticketId}`);
+            
+            // Buscar el ticket en la base de datos externa
+            const externalTicket = await this.tblTicketsNewsRepository.findOne({ where: { id: ticketId } });
+
+            if (!externalTicket) {
+                this.logger.warn(`⚠️ Ticket ID: ${ticketId} no encontrado en la base de datos externa`);
+                throw new Error(`Ticket con ID ${ticketId} no existe en la base de datos externa`);
+            }
+
+            // Crear o actualizar el ticket en la base de datos local
+            const localTicket = await this.findTicketLocalByGestionCobanId(ticketId);
+
+            if (localTicket) {
+                // Actualizar ticket existente usando la función reutilizable
+                this.logger.log(`🔄 Actualizando ticket local ID: ${localTicket.id}`);
+                return await this.updateTicketFromExternal(localTicket, externalTicket);
+            } else {
+                // Crear nuevo ticket usando la función reutilizable
+                this.logger.log(`🔄 Creando nuevo ticket local desde gestion_coban ID: ${ticketId}`);
+                return await this.createTicketFromExternal(externalTicket);
+            }  
+        } catch (error) {
+            this.logger.error(`❌ Error creando o actualizando ticket ID: ${ticketId}`, error.message);
+            throw new Error(`Error al crear o actualizar ticket ${ticketId}: ${error.message}`);
+        }
+    }
+
+    /**
+     * Crea un nuevo ticket local a partir de un ticket externo
+     * @param ticketRecord Datos del ticket externo (TblTicketsNews)
+     * @returns Ticket creado en la base de datos local
+     */
+    private async createTicketFromExternal(ticketRecord: TblTicketsNews): Promise<Ticket> {
+        try {
+            this.logger.debug(`📝 Creando nuevo ticket local desde ticket externo ID: ${ticketRecord.id}`);
+
+            const newTicket = this.ticketRepository.create({
+                ticket_new_id: ticketRecord.id,
+                descripcion: ticketRecord.descripcion || 'Sin descripción',
+                titulo: ticketRecord.titulo,
+                id_estado: ticketRecord.id_estado,
+                fecha_estimada: ticketRecord.fecha_estimada,
+                fecha_clasificacion: ticketRecord.fecha_clasificacion,
+                numero_issue: ticketRecord.numero_issue,
+            });
+
+            const savedTicket = await this.ticketRepository.save(newTicket);
+            
+            this.logger.debug(`✅ Ticket local creado con ID: ${savedTicket.id}`);
+            
+            return savedTicket;
+        } catch (error) {
+            this.logger.error(`❌ Error creando ticket local desde ticket externo ID: ${ticketRecord.id}`, error.message);
+            throw new Error(`Error al crear ticket local: ${error.message}`);
+        }
+    }
+
+    /**
+     * Actualiza un ticket local existente con datos del ticket externo
+     * @param localTicket Ticket local a actualizar
+     * @param ticketRecord Datos del ticket externo (TblTicketsNews)
+     * @returns Ticket actualizado
+     */
+    private async updateTicketFromExternal(localTicket: Ticket, ticketRecord: TblTicketsNews): Promise<Ticket> {
+        try {
+            this.logger.debug(`🔄 Actualizando ticket local ID: ${localTicket.id} con datos del ticket externo ID: ${ticketRecord.id}`);
+
+            // Actualizar campos
+            localTicket.descripcion = ticketRecord.descripcion || localTicket.descripcion;
+            localTicket.titulo = ticketRecord.titulo;
+            localTicket.id_estado = ticketRecord.id_estado;
+            localTicket.fecha_estimada = ticketRecord.fecha_estimada;
+            localTicket.fecha_clasificacion = ticketRecord.fecha_clasificacion;
+            localTicket.numero_issue = ticketRecord.numero_issue;
+
+            const updatedTicket = await this.ticketRepository.save(localTicket);
+            
+            this.logger.debug(`✅ Ticket local ID: ${localTicket.id} actualizado exitosamente`);
+            
+            return updatedTicket;
+        } catch (error) {
+            this.logger.error(`❌ Error actualizando ticket local ID: ${localTicket.id}`, error.message);
+            throw new Error(`Error al actualizar ticket local: ${error.message}`);
+        }
+    }
+
+    /**
+     * Busca un ticket local por su ticket_new_id (referencia a gestion_coban)
+     * @param ticketId ID del ticket en la base de datos externa (gestion_coban)
+     * @returns Ticket local o null si no existe
+     */
+    async findTicketLocalByGestionCobanId(ticketId: number): Promise<Ticket | null> {
+        try {
+            this.logger.debug(`🔍 Buscando ticket local con ticket_new_id: ${ticketId}`);
+
+            return await this.ticketRepository.findOne({ where: { ticket_new_id: ticketId } });
+        } catch (error) {
+            this.logger.error(`❌ Error buscando ticket local con ticket_new_id: ${ticketId}`, error.message);
+            // No lanzar error, retornar null para que el proceso continúe
+            return null;
         }
     }
 
@@ -274,6 +311,84 @@ export class GestionCobancMigrationService {
             };
         } catch (error) {
             this.logger.error('❌ Error obteniendo estadísticas:', error.message);
+            throw error;
+        }
+    }
+
+    /**
+     * Migra los datos de tbl_tickets_news (gestion_coban) a la tabla ticket local
+     * @param conditions Condiciones opcionales para filtrar los datos
+     * @returns Número de registros migrados
+     */
+    async migrateTicketsFromGestionCoban(conditions: any = {}): Promise<number> {
+        try {
+            this.checkNewSistemasConnection();
+
+            this.logger.log('🚀 Iniciando migración de tickets desde gestion_coban...');
+
+            // Construir query con condiciones
+            const queryBuilder = this.tblTicketsNewsRepository.createQueryBuilder('tn');
+
+            // Aplicar condiciones si las hay
+            if (conditions.fechaDesde) {
+                queryBuilder.andWhere('tn.created_at >= :fechaDesde', {
+                    fechaDesde: conditions.fechaDesde
+                });
+            }
+
+            if (conditions.fechaHasta) {
+                queryBuilder.andWhere('tn.created_at <= :fechaHasta', {
+                    fechaHasta: conditions.fechaHasta
+                });
+            }
+
+            if (conditions.estado) {
+                queryBuilder.andWhere('tn.id_estado = :estado', {
+                    estado: conditions.estado
+                });
+            }
+
+            if (conditions.ticketId) {
+                queryBuilder.andWhere('tn.id = :ticketId', {
+                    ticketId: conditions.ticketId
+                });
+            }
+
+            // Excluir tickets que ya existen en la tabla local
+            queryBuilder.andWhere(
+                'tn.id NOT IN (SELECT COALESCE(ticket_new_id, 0) FROM ticket WHERE ticket_new_id IS NOT NULL)'
+            );
+
+            const tblTicketsNewsRecords = await queryBuilder.getMany();
+
+            this.logger.log(`📋 Encontrados ${tblTicketsNewsRecords.length} tickets para migrar`);
+
+            let migratedCount = 0;
+
+            for (const ticketRecord of tblTicketsNewsRecords) {
+                try {
+                    // Verificar si el ticket ya existe en la tabla local
+                    const existingTicket = await this.findTicketLocalByGestionCobanId(ticketRecord.id);
+
+                    if (!existingTicket) {
+                        // Crear nuevo ticket usando la función reutilizable
+                        await this.createTicketFromExternal(ticketRecord);
+                        migratedCount++;
+
+                        this.logger.debug(`✅ Migrado ticket ID: ${ticketRecord.id}`);
+                    } else {
+                        this.logger.debug(`⏭️ Ticket ID: ${ticketRecord.id} ya existe, omitiendo`);
+                    }
+                } catch (error) {
+                    this.logger.error(`❌ Error migrando ticket ID: ${ticketRecord.id}`, error.message);
+                }
+            }
+
+            this.logger.log(`✅ Migración completada. ${migratedCount} tickets migrados exitosamente`);
+            return migratedCount;
+
+        } catch (error) {
+            this.logger.error('❌ Error durante la migración:', error.message);
             throw error;
         }
     }
