@@ -124,7 +124,7 @@ export class GestionCobancMigrationService {
         }
     }
 
-    async updateOneTicket(ticketId: number, updateData: Partial<Ticket>): Promise<Ticket> {
+    async updateOneTicket(ticketId: number): Promise<Ticket> {
         try {
             this.checkNewSistemasConnection();
 
@@ -137,13 +137,15 @@ export class GestionCobancMigrationService {
                 throw new Error(`Ticket con ID ${ticketId} no existe en la base de datos local`);
             }
 
-            // Actualizar los campos del ticket
-            Object.assign(ticket, updateData);
+            const ticketRecord = await this.tblTicketsNewsRepository.findOne({ where: { id: ticket.ticket_new_id } });
 
-            const updatedTicket = await this.ticketRepository.save(ticket);
+            if (!ticketRecord) {
+                this.logger.warn(`⚠️ Ticket externo ID: ${ticket.ticket_new_id} no encontrado en gestion_coban`);
+                throw new Error(`Ticket externo con ID ${ticket.ticket_new_id} no existe en la base de datos externa`);
+            }
 
-            this.logger.log(`✅ Ticket ID: ${ticketId} actualizado exitosamente`);
-
+            const updatedTicket = await this.updateTicketFromExternal(ticket, ticketRecord);
+            
             return updatedTicket;
 
         } catch (error) {

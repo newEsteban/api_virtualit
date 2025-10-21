@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { TblTicketsNews } from '../external/entities/tbl-tickets-news.entity';
+import { TblEstadosNew } from '../external/entities/tbl-estados-new.entity';
 
 /**
  * Configuración de TypeORM para la base de datos externa gestion_cobanc (Read Only)
@@ -34,7 +35,7 @@ export const typeOrmNewSistemasConfig = (configService: ConfigService): TypeOrmM
         database: configService.get<string>('NEW_SISTEMAS_DB_DATABASE'),
         entities: [
             TblTicketsNews, // Entidad para tbl_tickets_news de gestion_cobanc
-            // Agregar aquí más entidades de gestion_cobanc para migración futura
+            TblEstadosNew,
         ],
         synchronize: false, // ⚠️ IMPORTANTE: Mantener en false para conexión de solo lectura
         logging: configService.get<string>('NODE_ENV') === 'development',

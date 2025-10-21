@@ -50,7 +50,7 @@ export class MigrationController {
         try {
             this.logger.log('Iniciando actualización de un solo ticket...');
 
-            const ticket = await this.gestionCobancMigrationService.updateOneTicket(body.ticketId, body.updateData);
+            const ticket = await this.gestionCobancMigrationService.updateOneTicket(body.ticketId);
 
             return {
                 success: true,
