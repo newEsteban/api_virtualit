@@ -52,7 +52,7 @@ export class TipoController {
    */
   @Get(':id')
   @RequireRead('tipo')
-  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Tipo> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Tipo | null> {
     return await this.tipoService.findOne(id);
   }
 

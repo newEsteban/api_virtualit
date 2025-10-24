@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
 import { TblTicketsNews } from '../external/entities/tbl-tickets-news.entity';
 import { TblEstadosNew } from '../external/entities/tbl-estados-new.entity';
+import { TblTiposNew } from '../external/entities/tbl-tipos-new.entity';
 
 /**
  * Configuración de TypeORM para la base de datos externa gestion_cobanc (Read Only)
@@ -35,7 +36,8 @@ export const typeOrmNewSistemasConfig = (configService: ConfigService): TypeOrmM
         database: configService.get<string>('NEW_SISTEMAS_DB_DATABASE'),
         entities: [
             TblTicketsNews, // Entidad para tbl_tickets_news de gestion_cobanc
-            TblEstadosNew,
+            TblEstadosNew,  // Entidad para utl_subtipos de gestion_cobanc
+            TblTiposNew,    // Entidad para utl_tipos de gestion_cobanc
         ],
         synchronize: false, // ⚠️ IMPORTANTE: Mantener en false para conexión de solo lectura
         logging: configService.get<string>('NODE_ENV') === 'development',
@@ -43,8 +45,9 @@ export const typeOrmNewSistemasConfig = (configService: ConfigService): TypeOrmM
         connectTimeout: 10000, // 10 segundos timeout de conexión
         extra: {
             connectionLimit: 10,
-            acquireTimeout: 10000, // Movemos acquireTimeout a extra donde es válido
-            timeout: 10000,
+            // Opciones válidas para MySQL2
+            waitForConnections: true,
+            queueLimit: 0,
         },
         retryAttempts: 3,
         retryDelay: 3000,

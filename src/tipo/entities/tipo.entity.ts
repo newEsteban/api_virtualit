@@ -35,6 +35,22 @@ export class Tipo {
     })
     nombre: string;
 
+    @Column({
+        type: 'int',
+        unique: true,
+        comment: 'ID del tipo en sistema Cobanc',
+    })
+    tipo_cobanc_id: number;
+
+    /**
+     * Nombre del tipo
+     */
+    @Column({
+        type: 'varchar',
+        length: 255,
+    })
+    descripcion: string;
+
     /**
      * Relación One-to-Many con Subtipo
      * Un tipo puede tener múltiples subtipos

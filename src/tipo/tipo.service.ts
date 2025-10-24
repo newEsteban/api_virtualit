@@ -57,9 +57,10 @@ export class TipoService {
    * Busca un tipo por ID
    * 
    * @param id - ID del tipo
-   * @returns Tipo encontrado con sus subtipos
+   * @param isCallLocal - Si es true, retorna null en lugar de lanzar error
+   * @returns Tipo encontrado con sus subtipos o null si isCallLocal es true
    */
-  async findOne(id: number): Promise<Tipo> {
+  async findOne(id: number, isCallLocal: boolean = false): Promise<Tipo | null> {
     this.logger.log(`Buscando tipo con ID: ${id}`);
 
     const tipo = await this.tipoRepository.findOne({
@@ -67,8 +68,29 @@ export class TipoService {
       relations: ['subtipos'],
     });
 
-    if (!tipo) {
+    if (!tipo && !isCallLocal) {
       throw new NotFoundException(`Tipo con ID ${id} no encontrado`);
+    }
+
+    return tipo;
+  }
+
+  /**
+   * Busca un tipo por tipo_cobanc_id
+   * 
+   * @param tipo_cobanc_id - ID del tipo en Cobanc
+   * @param throwError - Si es true, lanza error cuando no encuentra. Si es false, retorna null
+   * @returns Tipo encontrado o null
+   */
+  async findOneIdCobanc(tipo_cobanc_id: number, throwError: boolean = true): Promise<Tipo | null> {
+    this.logger.log(`Buscando tipo con tipo_cobanc_id: ${tipo_cobanc_id}`);
+
+    const tipo = await this.tipoRepository.findOne({
+      where: { tipo_cobanc_id }
+    });
+
+    if (!tipo && throwError) {
+      throw new NotFoundException(`Tipo con tipo_cobanc_id ${tipo_cobanc_id} no encontrado`);
     }
 
     return tipo;
@@ -85,6 +107,10 @@ export class TipoService {
     this.logger.log(`Actualizando tipo con ID: ${id}`);
 
     const tipo = await this.findOne(id);
+
+    if (!tipo) {
+      throw new NotFoundException(`Tipo con ID ${id} no encontrado`);
+    }
 
     Object.assign(tipo, updateTipoDto);
 
@@ -106,6 +132,10 @@ export class TipoService {
     this.logger.log(`Eliminando tipo con ID: ${id}`);
 
     const tipo = await this.findOne(id);
+
+    if (!tipo) {
+      throw new NotFoundException(`Tipo con ID ${id} no encontrado`);
+    }
 
     await this.tipoRepository.softDelete(id);
 

@@ -27,6 +27,13 @@ export class Subtipo {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column({ 
+        type: 'int',
+        unique: true,
+        comment: 'id del subtipo en Cobanc' 
+    })
+    subtipo_conbanc_id: number;
+
     /**
      * Nombre del subtipo
      */

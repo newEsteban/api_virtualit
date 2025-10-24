@@ -1,4 +1,5 @@
-import { IsNumber } from "class-validator";
+import { IsNumber, IsOptional, IsString, ValidateIf } from "class-validator";
+
 
 export class MigrateOneTicketDto {
     @IsNumber()
@@ -6,9 +7,23 @@ export class MigrateOneTicketDto {
 }
 
 export class MigrateSubtipoDto {
+    @ValidateIf(o => o.tipo_id === undefined)
     @IsNumber()
-    subtipo_id: number;
+    subtipo_id?: number;
 
+    @ValidateIf(o => o.subtipo_id === undefined)
+    @IsNumber()
+    tipo_id?: number;
+}
+
+export class MigrateTipoDto {
     @IsNumber()
     tipo_id: number;
+
+    @IsString()
+    nombre: string;
+
+    @IsOptional()
+    @IsString()
+    descripcion?: string;
 }
