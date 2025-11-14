@@ -12,6 +12,7 @@ import { Ticket } from '../ticket/entities/ticket.entity';
 import { Subtipo } from '../subtipo/entities/subtipo.entity';
 import { Tipo } from '../tipo/entities/tipo.entity';
 import { TipoModule } from '../tipo/tipo.module'
+import { SubtipoModule } from '../subtipo/subtipo.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { TipoModule } from '../tipo/tipo.module'
       Tipo,
     ]),
     TipoModule,
+    SubtipoModule,
   ],
   controllers: [
     MigrationController,

@@ -7,13 +7,10 @@ export class MigrateOneTicketDto {
 }
 
 export class MigrateSubtipoDto {
-    @ValidateIf(o => o.tipo_id === undefined)
-    @IsNumber()
-    subtipo_id?: number;
 
-    @ValidateIf(o => o.subtipo_id === undefined)
+    @IsOptional()
     @IsNumber()
-    tipo_id?: number;
+    tipo_id: number;
 }
 
 export class MigrateTipoDto {

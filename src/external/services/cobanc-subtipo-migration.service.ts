@@ -7,6 +7,7 @@ import { Subtipo } from "../../subtipo/entities/subtipo.entity";
 import { Tipo } from "../../tipo/entities/tipo.entity";
 import { MigrateSubtipoDto } from "../dtos/local-general.dto";
 import { TipoService } from "../../tipo/tipo.service";
+import { SubtipoService } from "../../subtipo/subtipo.service";
 
 @Injectable()
 export class CobancSubtipoMigrationService {
@@ -19,69 +20,36 @@ export class CobancSubtipoMigrationService {
         @InjectRepository(TblTiposNew, 'newSistemasConnection')
         private readonly tblTiposNewRepository: Repository<TblTiposNew>,
 
-        @InjectRepository(Subtipo)
-        private readonly estadoLocalRepository: Repository<Subtipo>,
-
         private readonly tipoService: TipoService,
+
+        private readonly subtipoService: SubtipoService,
     ) {}
 
-    async updateOrCreateSubtiposAndTipos( request: MigrateSubtipoDto ) {
-        const { subtipo_id, tipo_id } = request;
-
-        if (!subtipo_id && !tipo_id) {
-            this.logger.warn('No se proporcionaron IDs de subtipo o tipo');
-            return;
-        }
-
-        if (subtipo_id) {
-            this.migrateSubtipo(subtipo_id);
-        }
+    async createSubtiposByTipo( request: MigrateSubtipoDto ) {
+        const { tipo_id } = request;
 
     }
 
-    private async migrateSubtipo(subtipoId: number) {
-        const subtipoCobanc = await this.tblEstadosNewRepository.findOne({ 
-            where: { id_subtipo: subtipoId } 
-        });
+    public async migrateSubtipos(request : MigrateSubtipoDto) {
+        const { tipo_id } = request;
 
-        if (!subtipoCobanc) {
-            this.logger.warn(`Subtipo con ID ${subtipoId} no encontrado en gestion_coban`);
-            return null;
-        }
-
-        // 🔍 Validar que el tipo existe antes de crear/actualizar el subtipo
-        let tipo = await this.tipoService.findOneIdCobanc(subtipoCobanc.id_tipo, false);
+        let tipo = await this.tipoService.findOneIdCobanc(tipo_id, false);
 
         if (!tipo) {
-           this.logger.log(`Tipo con ID ${subtipoCobanc.id_tipo} no existe. Creando tipo...`);
-           tipo = await this.migrateTipo(subtipoCobanc.id_tipo);
+           this.logger.log(`Tipo con ID ${tipo_id} no existe. Creando tipo...`);
+           tipo = await this.migrateTipo(tipo_id);
         }
 
         this.logger.log(`✅ Tipo con ID ${tipo.id} existe. Procediendo con la migración del subtipo...`);
-        
-        let subtipoLocal = await this.estadoLocalRepository.findOne({ 
-            where: { subtipo_conbanc_id: subtipoId } 
-        });
 
-        if (subtipoLocal) {
-            this.logger.log(`Actualizando subtipo local con ID ${subtipoId}`);
-            subtipoLocal.nombre = subtipoCobanc.descripcion;
-            subtipoLocal.tipo_id = tipo.id;
-        } else {
-            this.logger.log(`Creando nuevo subtipo local con ID ${subtipoId}`);
-            subtipoLocal = this.estadoLocalRepository.create({
-                subtipo_conbanc_id: subtipoCobanc.id_subtipo, // 🔑 Campo obligatorio
-                nombre: subtipoCobanc.descripcion,
-                tipo_id: tipo.id,
-            });
-        }
+        await this.validationAndMigrationSubtipo(tipo);
 
-        this.logger.debug('Datos del subtipo a guardar:', subtipoLocal);
-
-        return this.estadoLocalRepository.save(subtipoLocal);
+        return {
+            message: `Migración de subtipos para el tipo con ID ${tipo.id} completada.`,
+        };
     }
 
-    private async migrateTipo(tipoId: number) {
+    private async migrateTipo(tipoId: number): Promise<Tipo> {
         //si no exite el tipo, lo creamos en base al tipoCobanc
         const tipoCobanc = await this.tblTiposNewRepository.findOne({
             where: { id_tipo: tipoId }
@@ -94,7 +62,7 @@ export class CobancSubtipoMigrationService {
         }
 
         this.logger.log(`Creando tipo con ID ${tipoId} antes de migrar el subtipo...`);
-        const newTipo = await this.tipoService.create({
+        const tipo = await this.tipoService.create({
             tipo_cobanc_id: tipoCobanc.id_tipo,
             nombre: tipoCobanc.nombre,
             descripcion: tipoCobanc.descripcion,
@@ -102,6 +70,56 @@ export class CobancSubtipoMigrationService {
 
         this.logger.log(`Tipo con ID ${tipoCobanc.id_tipo} creado exitosamente.`);
         
-        return newTipo
+        return tipo
+    }
+
+    /**
+     * Valida y migra los subtipos asociados a un tipo específico.
+     * 
+     * Esta función realiza las siguientes operaciones:
+     * 1. Obtiene todos los subtipos de Cobanc asociados al tipo_cobanc_id del tipo local.
+     * 2. Compara con los subtipos ya existentes en el sistema local para identificar cuáles faltan por migrar.
+     * 3. Si hay subtipos nuevos, los crea en paralelo usando Promise.allSettled para manejar errores individualmente.
+     * 4. Registra logs para cada subtipo migrado exitosamente o con error.
+     * 
+     * @param tipo - El tipo local para el cual se van a validar y migrar los subtipos.
+     * @returns Promise<void> - No retorna valor, pero registra el progreso y errores en los logs.
+     */
+    private async validationAndMigrationSubtipo(tipo: Tipo) {
+
+        this.logger.log(`Validando y migrando subtipos para el tipo con ID ${tipo.id}`);
+
+        let newSubtipos = await this.tblEstadosNewRepository.find({
+            where: { id_tipo: tipo.tipo_cobanc_id },
+        });
+
+        const subtipoCobancIds = newSubtipos.map(subtipo => subtipo.id_subtipo);
+        const subtipoIds =  await this.subtipoService.getIdsByTipo(tipo.id);
+
+        //validamos cuales subtipos faltan por migrar
+        const subtipoIdsToMigrate = subtipoCobancIds.filter(id => !subtipoIds.includes(id));
+        if(subtipoIdsToMigrate.length === 0) {
+            this.logger.log(`No hay nuevos subtipos para migrar para el tipo con ID ${tipo.id}`);
+            return;
+        }
+
+        this.logger.log(`Se encontraron ${subtipoIdsToMigrate.length} nuevos subtipos para migrar para el tipo con ID ${tipo.id}`);
+
+        newSubtipos = newSubtipos.filter(subtipo => subtipoIdsToMigrate.includes(subtipo.id_subtipo));
+
+        const results = await Promise.allSettled(
+            newSubtipos.map(subtipoConbanc =>
+                this.subtipoService.createBySubtipoCobanc(subtipoConbanc, tipo.id)
+            )
+        );
+
+        results.forEach((result, index) => {
+            if (result.status === 'rejected') {
+                this.logger.error(`Error en subtipo ${newSubtipos[index].id_subtipo}: ${result.reason}`);
+            } else {
+                this.logger.log(`Subtipo ${newSubtipos[index].id_subtipo} migrado exitosamente`);
+            }
+        });
+        this.logger.log(`Migración de subtipos para el tipo con ID ${tipo.id} completada.`);
     }
 }

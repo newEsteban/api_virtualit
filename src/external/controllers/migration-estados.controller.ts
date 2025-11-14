@@ -17,7 +17,7 @@ export class MigrationEstadosController {
         try {
             this.logger.log('Iniciando copia de subtipos para el tickets...');
             
-            const result = await this.conbancSubtipoMigrationService.updateOrCreateSubtiposAndTipos(body);
+            const result = await this.conbancSubtipoMigrationService.migrateSubtipos(body);
 
             return {
                 success: true,
