@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
 
-@Entity({ name: 'tbl_archivos_new', database: 'new_sistemas' })
+@Entity({ name: 'tbl_archivos_new'})
 export class TblArchivosNew {
     
     @PrimaryGeneratedColumn({ type: 'int', unsigned: true })

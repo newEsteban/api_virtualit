@@ -3,8 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { TblTicketsNews } from '../entities/tbl-tickets-news.entity';
+import { TblArchivosNew } from '../entities/tbl-archivos-new.entity';
 import { Ticket } from '../../ticket/entities/ticket.entity';
 import { CobancSubtipoMigrationService } from './cobanc-subtipo-migration.service';
+import { CobancArchivoNewMigrationService } from './cobanc-archivo-new-migration.service';
 
 @Injectable()
 export class GestionCobancMigrationService {
@@ -16,13 +18,16 @@ export class GestionCobancMigrationService {
         @InjectRepository(TblTicketsNews, 'newSistemasConnection')
         private readonly tblTicketsNewsRepository: Repository<TblTicketsNews>,
 
+        @Optional()
+        @InjectRepository(TblArchivosNew, 'newSistemasConnection')
+        private readonly tblArchivosNewRepository: Repository<TblArchivosNew>,
+
         @InjectRepository(Ticket)
         private readonly ticketRepository: Repository<Ticket>,
 
-        
-
         private readonly configService: ConfigService,
         private readonly cobancSubtipoMigrationService: CobancSubtipoMigrationService,
+        private readonly cobancArchivoNewMigrationService: CobancArchivoNewMigrationService,
     ) {
         this.isNewSistemasEnabled = this.configService.get<boolean>('NEW_SISTEMAS_ENABLED', false);
 
@@ -86,8 +91,13 @@ export class GestionCobancMigrationService {
             // Verificar si el ticket ya existe en la tabla local
             const existingTicket = await this.findTicketLocalByGestionCobanId(ticketRecord.id);
 
+
             if (existingTicket) {
                 this.logger.warn(`⏭️ Ticket ID: ${ticketId} ya existe en la base de datos local`);
+                
+                // Migrar archivos asociados al ticket
+                await this.migrateTicketArchivos(ticketRecord.id, existingTicket);
+                
                 return {
                     ticketId,
                     status: 'already_exists',
@@ -261,6 +271,67 @@ export class GestionCobancMigrationService {
         } catch (error) {
             this.logger.error(`❌ Error actualizando ticket local ID: ${localTicket.id}`, error.message);
             throw new Error(`Error al actualizar ticket local: ${error.message}`);
+        }
+    }
+
+    /**
+     * Migra los archivos asociados a un ticket desde Cobanc.
+     * Busca todos los archivos en tbl_archivos_new donde archivable_id = ticketId 
+     * y archivable_type = 'App\\Sistema\\TicketNew\\TicketNew'.
+     * 
+     * @param ticketCobancId ID del ticket en la base de datos de Cobanc
+     * @param ticketLocal Ticket local al que se asociarán los archivos
+     * @returns Promise<void>
+     */
+    private async migrateTicketArchivos(ticketCobancId: number, ticketLocal: Ticket): Promise<void> {
+        try {
+            // Validar que el repositorio de archivos esté disponible
+            if (!this.tblArchivosNewRepository) {
+                this.logger.warn(`⚠️ Repositorio de TblArchivosNew no disponible. Omitiendo migración de archivos.`);
+                return;
+            }
+
+            this.logger.log(`📎 Buscando archivos para el ticket Cobanc ID: ${ticketCobancId}`);
+            
+            // Buscar todos los archivos asociados al ticket en Cobanc
+            const archivosCobanc = await this.tblArchivosNewRepository.find({
+                where: {
+                    archivable_id: ticketCobancId,
+                    archivable_type: 'App\\Sistema\\TicketNew\\TicketNew'
+                }
+            });
+
+            if (archivosCobanc.length === 0) {
+                this.logger.log(`📎 No se encontraron archivos para el ticket Cobanc ID: ${ticketCobancId}`);
+                return;
+            }
+
+            this.logger.log(`📎 Se encontraron ${archivosCobanc.length} archivos para el ticket Cobanc ID: ${ticketCobancId}`);
+
+            // Extraer los IDs de los archivos
+            const archivoIds = archivosCobanc.map(archivo => archivo.id);
+
+            // Migrar los archivos asociándolos al ticket local
+            const result = await this.cobancArchivoNewMigrationService.migrateArchivos(
+                archivoIds,
+                { type: 'Ticket', id: ticketLocal.id }
+            );
+
+            this.logger.log(
+                `✅ Archivos migrados: ${result.migrated}, omitidos: ${result.skipped}, errores: ${result.errors}`
+            );
+        } catch (error) {
+            // Verificar si es un error de permisos
+            if (error.message?.includes('SELECT command denied') || error.message?.includes('tbl_archivos_new')) {
+                this.logger.warn(
+                    `⚠️ Sin permisos para acceder a tbl_archivos_new. ` +
+                    `Contacta al administrador de BD para otorgar permisos SELECT al usuario 'ecardona'. ` +
+                    `Ticket migrado sin archivos.`
+                );
+            } else {
+                this.logger.error(`❌ Error migrando archivos para ticket Cobanc ID: ${ticketCobancId}`, error.message);
+            }
+            // No lanzar error para no interrumpir la migración del ticket
         }
     }
 
