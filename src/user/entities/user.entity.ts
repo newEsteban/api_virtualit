@@ -10,6 +10,9 @@ import {
     ManyToMany,
     JoinTable
 } from 'typeorm';
+import { AfterLoad } from 'typeorm';
+import { Expose } from 'class-transformer';
+import { PolymorphicEntity } from '../../common/entities/polymorphic.entity';
 import * as bcrypt from 'bcrypt';
 import { Rol } from '../../rol/entities/rol.entity';
 
@@ -23,7 +26,12 @@ import { Rol } from '../../rol/entities/rol.entity';
  * - ManyToMany con Rol: Un usuario puede tener múltiples roles
  */
 @Entity()
-export class User {
+export class User extends PolymorphicEntity {
+    /**
+     * Identificador estable para relaciones polimórficas.
+     * Puedes cambiar este valor para que coincida con namespaces externos.
+     */
+    static ENTITY_TYPE = 'User';
     /**
      * Identificador único del usuario
      */
@@ -73,6 +81,13 @@ export class User {
         name: 'is_developer',
     })
     is_developer: boolean;
+
+    /**
+     * Atributo calculado disponible despues de cargar la entidad
+     * Se rellena en el hook @AfterLoad y se expone en la serialización
+     */
+    @Expose()
+    displayName?: string;
 
     /**
      * Relación Many-to-Many con Rol
@@ -139,5 +154,15 @@ export class User {
     @BeforeUpdate()
     checkFieldsBeforeUpdate() {
         this.checkFieldsBeforeInsert();
+    }
+
+    @AfterLoad()
+    setComputedAttributes() {
+        // Ejemplo: displayName compuesto por nombre y email
+        try {
+            this.displayName = this.email ? `${this.name} <${this.email}>` : this.name;
+        } catch (e) {
+            this.displayName = this.name;
+        }
     }
 }

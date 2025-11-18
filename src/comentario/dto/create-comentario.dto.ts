@@ -31,11 +31,17 @@ export class CreateComentarioDto {
     commentable_id: number;
 
     /**
-     * Tipo de entidad a la que pertenece el comentario
-     * @example "Ticket"
+     * Tipo/namespace del recurso al que pertenece el comentario
+     * Ejemplo: 'Ticket', 'User', 'Tipo', 'ClasificacionTicket', etc.
      */
     @IsNotEmpty({ message: 'El commentable_type no puede estar vacío' })
-    @IsString({ message: 'El commentable_type debe ser una cadena de texto' })
-    @MaxLength(100, { message: 'El commentable_type no puede exceder los 100 caracteres' })
+    @IsString({ message: 'El commentable_type debe ser una cadena' })
+    @MaxLength(200, { message: 'El commentable_type es demasiado largo' })
     commentable_type: string;
+
+    @IsNotEmpty({ message: 'El usuario_nombre no puede estar vacío' })
+    @IsString({ message: 'El usuario_nombre debe ser una cadena' })
+    @MaxLength(255, { message: 'El usuario_nombre es demasiado largo' })
+    usuario_nombre: string;
+
 }

@@ -9,6 +9,8 @@ import {
     OneToMany
 } from 'typeorm';
 import { ClasificacionTicket } from './clasificacion-ticket.entity';
+import { Archivo } from '../../archivo/entities/archivo.entity';
+import { PolymorphicEntity } from '../../common/entities/polymorphic.entity';
 
 /**
  * Entidad Ticket
@@ -22,7 +24,11 @@ import { ClasificacionTicket } from './clasificacion-ticket.entity';
  */
 @Entity()
 @Index(['ticket_new_id']) // Índice en ticket_new_id
-export class Ticket {
+export class Ticket extends PolymorphicEntity {
+    /**
+     * Stable entity type for polymorphic relations.
+     */
+    static ENTITY_TYPE = 'Ticket';
     /**
      * Identificador único del ticket (autoincremental)
      */
@@ -66,6 +72,12 @@ export class Ticket {
      */
     @OneToMany(() => ClasificacionTicket, (clasificacion) => clasificacion.ticket)
     clasificaciones: ClasificacionTicket[];
+
+    /**
+     * Archivos asociados al ticket
+     */
+    @OneToMany(() => Archivo, (archivo) => archivo.ticket)
+    archivos: Archivo[];
 
     /**
      * Fecha de creación del ticket

@@ -7,9 +7,12 @@ import {
     DeleteDateColumn,
     ManyToOne,
     JoinColumn,
-    Index
+    Index,
+    OneToMany
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
+import { PolymorphicEntity } from '../../common/entities/polymorphic.entity';
+import { Archivo } from '../../archivo/entities/archivo.entity';
 
 /**
  * Entidad Comentario (Polimórfica)
@@ -25,8 +28,12 @@ import { User } from '../../user/entities/user.entity';
  * - ManyToOne con User: Cada comentario pertenece a un usuario
  */
 @Entity()
-@Index(['commentable_id', 'commentable_type']) // Índice compuesto para búsquedas polimórficas
-export class Comentario {
+@Index(['commentable_id', 'commentable_type'])
+export class Comentario extends PolymorphicEntity {
+    /**
+     * Stable entity type for polymorphic relations.
+     */
+    static ENTITY_TYPE = 'Comentario';
     /**
      * Identificador único del comentario (autoincremental)
      */
@@ -41,12 +48,23 @@ export class Comentario {
     })
     comentario: string;
 
+    @Column({
+        name: 'usuario_nombre',
+        type: 'varchar',
+        length: 255,
+        nullable: true,
+        comment: 'Nombre del usuario cobanc que creó el comentario'
+    })
+    usuario_nombre: string;
+
     /**
      * ID del usuario que creó el comentario (referencia a User)
      */
     @Column({
         name: 'usuario_id',
         type: 'uuid',
+        nullable: true,
+        comment: 'ID del usuario local que creó el comentario'
     })
     usuario_id: string;
 
@@ -80,6 +98,13 @@ export class Comentario {
         length: 100,
     })
     commentable_type: string;
+
+    /**
+     * Archivos adjuntos al comentario
+     * Nota: válido cuando archivable_type = 'Comentario' y archivable_id = comentario.id
+     */
+    @OneToMany(() => Archivo, (archivo) => archivo.comentario)
+    archivos: Archivo[];
 
     /**
      * Fecha de creación del comentario

@@ -5,8 +5,13 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     DeleteDateColumn,
-    Index
+    Index,
+    ManyToOne,
+    JoinColumn
 } from 'typeorm';
+import { Ticket } from '../../ticket/entities/ticket.entity';
+import { Comentario } from '../../comentario/entities/comentario.entity';
+import { PolymorphicEntity } from '../../common/entities/polymorphic.entity';
 
 /**
  * Entidad Archivo (Polimórfica)
@@ -20,7 +25,11 @@ import {
  */
 @Entity()
 @Index(['archivo_new_id']) // Índice en archivo_new_id
-export class Archivo {
+export class Archivo extends PolymorphicEntity {
+    /**
+     * Stable entity type for polymorphic relations.
+     */
+    static ENTITY_TYPE = 'Archivo';
     /**
      * Identificador único del archivo (autoincremental)
      */
@@ -41,6 +50,24 @@ export class Archivo {
 
     @Column({ type: 'int', nullable: false })
     archivable_id: number;
+
+    /**
+     * Relación opcional con Ticket
+     * Nota: esta relación es válida cuando `archivable_type` corresponde a la entidad Ticket.
+     * No se crean constraints de FK para mantener compatibilidad con relación polimórfica.
+     */
+    @ManyToOne(() => Ticket, (ticket) => ticket.archivos, { nullable: true, createForeignKeyConstraints: false })
+    @JoinColumn({ name: 'archivable_id', referencedColumnName: 'id' })
+    ticket: Ticket;
+
+    /**
+     * Relación opcional con Comentario
+     * Nota: esta relación es válida cuando `archivable_type` corresponde a la entidad Comentario.
+     * No se crean constraints de FK para mantener compatibilidad con relación polimórfica.
+     */
+    @ManyToOne(() => Comentario, (comentario) => comentario.archivos, { nullable: true, createForeignKeyConstraints: false })
+    @JoinColumn({ name: 'archivable_id', referencedColumnName: 'id' })
+    comentario: Comentario;
 
     /**
      * Ruta donde se almacena el archivo
