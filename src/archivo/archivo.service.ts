@@ -28,7 +28,7 @@ export class ArchivoService {
    */
   async create(createArchivoDto: CreateArchivoDto): Promise<Archivo> {
     try {
-      this.logger.log(`Creando archivo: ${createArchivoDto.nombre} para ${createArchivoDto.modulo_type}:${createArchivoDto.modulo_id}`);
+      this.logger.log(`Creando archivo: ${createArchivoDto.display_name} para ${createArchivoDto.archivable_type}:${createArchivoDto.archivable_id}`);
 
       const archivo = this.archivoRepository.create(createArchivoDto);
       return await this.archivoRepository.save(archivo);
@@ -85,8 +85,8 @@ export class ArchivoService {
 
     return await this.archivoRepository.find({
       where: {
-        modulo_type: moduloType,
-        modulo_id: moduloId
+        archivable_type: moduloType,
+        archivable_id: moduloId
       },
       order: {
         id: 'ASC',
@@ -104,7 +104,7 @@ export class ArchivoService {
     this.logger.log(`Obteniendo archivos de tipo: ${moduloType}`);
 
     return await this.archivoRepository.find({
-      where: { modulo_type: moduloType },
+      where: { archivable_type: moduloType },
       order: {
         id: 'ASC',
       },
@@ -126,6 +126,26 @@ export class ArchivoService {
         id: 'ASC',
       },
     });
+  }
+
+  /**
+   * Obtiene archivos por múltiples archivo_new_ids
+   * 
+   * @param archivoNewIds - Array de IDs de referencia de archivos
+   * @returns Array de archivos que coincidan con los IDs proporcionados
+   */
+  async findByArchivoNewIds(archivoNewIds: number[]): Promise<Archivo[]> {
+    this.logger.log(`Obteniendo archivos con archivo_new_ids: ${archivoNewIds.join(', ')}`);
+
+    if (archivoNewIds.length === 0) {
+      return [];
+    }
+
+    return await this.archivoRepository
+      .createQueryBuilder('archivo')
+      .where('archivo.archivo_new_id IN (:...ids)', { ids: archivoNewIds })
+      .orderBy('archivo.id', 'ASC')
+      .getMany();
   }
 
   /**
@@ -163,6 +183,6 @@ export class ArchivoService {
 
     await this.archivoRepository.softDelete(id);
 
-    return { message: `Archivo ${archivo.nombre} eliminado correctamente` };
+    return { message: `Archivo ${archivo.display_name} eliminado correctamente` };
   }
 }

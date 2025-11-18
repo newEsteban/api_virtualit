@@ -5,9 +5,11 @@ import { TblEstadosNew } from "../entities/tbl-estados-new.entity";
 import { TblTiposNew } from "../entities/tbl-tipos-new.entity";
 import { Subtipo } from "../../subtipo/entities/subtipo.entity";
 import { Tipo } from "../../tipo/entities/tipo.entity";
-import { MigrateSubtipoDto } from "../dtos/local-general.dto";
+import { MigrateEstadoDto, MigrateSubtipoDto } from "../dtos/local-general.dto";
 import { TipoService } from "../../tipo/tipo.service";
 import { SubtipoService } from "../../subtipo/subtipo.service";
+
+ 
 
 @Injectable()
 export class CobancSubtipoMigrationService {
@@ -21,14 +23,34 @@ export class CobancSubtipoMigrationService {
         private readonly tblTiposNewRepository: Repository<TblTiposNew>,
 
         private readonly tipoService: TipoService,
-
         private readonly subtipoService: SubtipoService,
     ) {}
 
-    async createSubtiposByTipo( request: MigrateSubtipoDto ) {
-        const { tipo_id } = request;
+    /**
+     * Verifica si un estado/subtipo ya existe localmente buscando por `subtipo_conbanc_id`.
+     * Acepta tanto un número (estado_id) como un `MigrateEstadoDto`.
+     * @param estadoOrDto - `estado_id` o `MigrateEstadoDto`
+     * @returns Promise<boolean> - true si existe, false si no
+     */
+    async checkEstadoExists(estadoOrDto: number | MigrateEstadoDto): Promise<boolean> {
+        const estadoId = typeof estadoOrDto === 'number' ? estadoOrDto : estadoOrDto.estado_id;
 
+        this.logger.log(`Verificando existencia de subtipo con subtipo_conbanc_id: ${estadoId}`);
+
+        const subtipo = await this.subtipoService.findBySubtipoCobancId(estadoId);
+        
+        if (!subtipo) {
+            this.logger.log(`El subtipo no existe se procedera a crearlo por medio del tipo id: ${estadoId}`);
+        }
+
+        return subtipo !== null;
     }
+
+    async getSubTipoByCobancId(subtipoCobancId: number): Promise<TblEstadosNew | null> {
+        const subtipo = await this.tblEstadosNewRepository.findOne({ where: { id_subtipo: subtipoCobancId } });
+        return subtipo ?? null;
+    }
+
 
     public async migrateSubtipos(request : MigrateSubtipoDto) {
         const { tipo_id } = request;

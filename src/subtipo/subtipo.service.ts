@@ -127,6 +127,21 @@ export class SubtipoService {
     }
 
     /**
+     * Busca un subtipo por su ID en Cobanc (subtipo_conbanc_id)
+     * @param subtipoCobancId - ID del subtipo en Cobanc
+     * @returns Subtipo | null
+     */
+    async findBySubtipoCobancId(subtipoCobancId: number): Promise<Subtipo | null> {
+        this.logger.log(`Buscando subtipo por subtipo_conbanc_id: ${subtipoCobancId}`);
+
+        const subtipo = await this.subtipoRepository.findOne({
+            where: { subtipo_conbanc_id: subtipoCobancId },
+        });
+
+        return subtipo || null;
+    }
+
+    /**
      * Actualiza un subtipo
      *
      * @param id - ID del subtipo a actualizar

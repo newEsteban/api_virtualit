@@ -93,7 +93,7 @@ import { GitLabModule } from './gitlab/gitlab.module';
     ComentarioModule,
     GestionCobancModule, // Módulo para migración de datos desde gestion_cobanc
     CommandsModule, // Módulo para comandos CLI
-    GitLabModule, // Módulo para integración con GitLab API
+    GitLabModule // Módulo para integración con GitLab API
   ],
   controllers: [AppController],
   providers: [AppService],

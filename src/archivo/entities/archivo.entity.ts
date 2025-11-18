@@ -30,22 +30,17 @@ export class Archivo {
     /**
      * ID del recurso al que pertenece este archivo (relación polimórfica)
      */
-    @Column({
-        name: 'modulo_id',
-        type: 'int',
-    })
-    modulo_id: number;
+    @Column({ type: 'varchar', length: 191, nullable: true })
+    documentable_type: string;
 
-    /**
-     * Tipo/namespace del recurso al que pertenece (relación polimórfica)
-     * Ejemplos: 'User', 'Tipo', 'Subtipo', etc.
-     */
-    @Column({
-        name: 'modulo_type',
-        type: 'varchar',
-        length: 100,
-    })
-    modulo_type: string;
+    @Column({ type: 'int', nullable: true })
+    documentable_id: number;
+
+    @Column({ type: 'varchar', length: 191, nullable: false, default: '' })
+    archivable_type: string;
+
+    @Column({ type: 'int', nullable: false })
+    archivable_id: number;
 
     /**
      * Ruta donde se almacena el archivo
@@ -54,7 +49,7 @@ export class Archivo {
         type: 'varchar',
         length: 500,
     })
-    ruta: string;
+    route: string;
 
     /**
      * Nombre del archivo
@@ -63,7 +58,7 @@ export class Archivo {
         type: 'varchar',
         length: 255,
     })
-    nombre: string;
+    display_name: string;
 
     /**
      * Extensión del archivo (ej: 'pdf', 'jpg', 'png')

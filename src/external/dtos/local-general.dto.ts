@@ -13,6 +13,11 @@ export class MigrateSubtipoDto {
     tipo_id: number;
 }
 
+export class MigrateEstadoDto {
+    @IsNumber()
+    estado_id: number;
+}
+
 export class MigrateTipoDto {
     @IsNumber()
     tipo_id: number;

@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { TblTicketsNews } from '../entities/tbl-tickets-news.entity';
 import { Ticket } from '../../ticket/entities/ticket.entity';
+import { CobancSubtipoMigrationService } from './cobanc-subtipo-migration.service';
 
 @Injectable()
 export class GestionCobancMigrationService {
@@ -18,7 +19,10 @@ export class GestionCobancMigrationService {
         @InjectRepository(Ticket)
         private readonly ticketRepository: Repository<Ticket>,
 
+        
+
         private readonly configService: ConfigService,
+        private readonly cobancSubtipoMigrationService: CobancSubtipoMigrationService,
     ) {
         this.isNewSistemasEnabled = this.configService.get<boolean>('NEW_SISTEMAS_ENABLED', false);
 
@@ -93,6 +97,21 @@ export class GestionCobancMigrationService {
                         migratedAt: existingTicket.created_at
                     }
                 };
+            }
+
+            // validamos la existencia del estado/subtipo del ticket antes de migrar
+            const estado = await this.cobancSubtipoMigrationService.checkEstadoExists(ticketRecord.id_estado);
+            if (!estado) {
+                // Consultammos en la base de datos externa por el id del estado/subtipo para optener el tipo_id
+                const estadoCobanc = await this.cobancSubtipoMigrationService.getSubTipoByCobancId(ticketRecord.id_estado);
+                if (!estadoCobanc) {
+                    this.logger.warn(`⚠️ El estado/subtipo con ID: ${ticketRecord.id_estado} no existe en gestion_coban`);
+                    throw new Error(`El estado/subtipo con ID: ${ticketRecord.id_estado} no existe en gestion_coban`);
+                }
+
+                this.logger.log(`El estado/subtipo con ID: ${ticketRecord.id_estado} no existe localmente. Creando subtipo...`);
+                await this.cobancSubtipoMigrationService.migrateSubtipos({ tipo_id: estadoCobanc.id_tipo });
+                this.logger.log(`✅ Subtipo con ID: ${ticketRecord.id_estado} creado exitosamente.`);
             }
 
             // Migrar el ticket usando la función reutilizable
