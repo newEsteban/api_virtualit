@@ -100,6 +100,17 @@ export class Comentario extends PolymorphicEntity {
     commentable_type: string;
 
     /**
+     * ID del comentario en el sistema Cobanc (referencia externa)
+     */
+    @Column({
+        name: 'comentario_cobanc_id',
+        type: 'int',
+        unique: true,
+        comment: 'ID del comentario en el sistema externo Cobanc'
+    })
+    comentario_cobanc_id: number;
+
+    /**
      * Archivos adjuntos al comentario
      * Nota: válido cuando archivable_type = 'Comentario' y archivable_id = comentario.id
      */

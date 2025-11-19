@@ -39,6 +39,14 @@ export class CreateComentarioDto {
     @MaxLength(200, { message: 'El commentable_type es demasiado largo' })
     commentable_type: string;
 
+    /**
+     * ID del comentario en el sistema Cobanc (externo)
+     */
+    @IsNotEmpty({ message: 'El comentario_cobanc_id no puede estar vacío' })
+    @IsInt({ message: 'El comentario_cobanc_id debe ser un número entero' })
+    @Type(() => Number)
+    comentario_cobanc_id: number;
+
     @IsNotEmpty({ message: 'El usuario_nombre no puede estar vacío' })
     @IsString({ message: 'El usuario_nombre debe ser una cadena' })
     @MaxLength(255, { message: 'El usuario_nombre es demasiado largo' })
