@@ -4,6 +4,8 @@ import { TblTicketsNews } from '../external/entities/tbl-tickets-news.entity';
 import { TblEstadosNew } from '../external/entities/tbl-estados-new.entity';
 import { TblTiposNew } from '../external/entities/tbl-tipos-new.entity';
 import { TblArchivosNew } from 'src/external/entities/tbl-archivos-new.entity';
+import { TblComentariosTicket } from 'src/external/entities/tbl-comentarios-ticket.entity';
+import { UtlUsuarios } from 'src/external/entities/utl-usuarios.entity';
 
 /**
  * Configuración de TypeORM para la base de datos externa gestion_cobanc (Read Only)
@@ -40,6 +42,8 @@ export const typeOrmNewSistemasConfig = (configService: ConfigService): TypeOrmM
             TblEstadosNew,  // Entidad para utl_subtipos de gestion_cobanc
             TblTiposNew,    // Entidad para utl_tipos de gestion_cobanc
             TblArchivosNew, // Entidad para tbl_archivos de gestion_cobanc
+            TblComentariosTicket, // Entidad para tbl_comentarios_ticket de gestion_cobanc
+            UtlUsuarios,    // Entidad para utl_usuarios de gestion_cobanc
         ],
         synchronize: false, // ⚠️ IMPORTANTE: Mantener en false para conexión de solo lectura
         logging: configService.get<string>('NODE_ENV') === 'development',
