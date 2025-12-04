@@ -1,11 +1,11 @@
 export interface AssociatedEntity {
     /**
-     * Nombre del tipo de entidad (ej: 'Ticket', 'Subtipo')
+     * Obtiene el ID de la entidad (clave primaria)
      */
-    type: string;
+    getKey(): number | string | null;
 
     /**
-     * ID de la entidad asociada en la base de datos local
+     * Obtiene el tipo de la entidad
      */
-    id: number;
+    getType(): string;
 }

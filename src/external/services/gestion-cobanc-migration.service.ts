@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { TblTicketsNews } from '../entities/tbl-tickets-news.entity';
 import { TblArchivosNew } from '../entities/tbl-archivos-new.entity';
 import { Ticket } from '../../ticket/entities/ticket.entity';
+import { Comentario } from '../../comentario/entities/comentario.entity';
 import { CobancSubtipoMigrationService } from './cobanc-subtipo-migration.service';
 import { CobancArchivoNewMigrationService } from './cobanc-archivo-new-migration.service';
 import { CobancComentarioMigrationService } from './cobanc-comentario-migration.service';
@@ -25,6 +26,9 @@ export class GestionCobancMigrationService {
 
         @InjectRepository(Ticket)
         private readonly ticketRepository: Repository<Ticket>,
+
+        @InjectRepository(Comentario)
+        private readonly comentarioRepository: Repository<Comentario>,
 
         private readonly configService: ConfigService,
         private readonly cobancSubtipoMigrationService: CobancSubtipoMigrationService,
@@ -322,7 +326,7 @@ export class GestionCobancMigrationService {
             // Migrar los archivos asociándolos al ticket local
             const result = await this.cobancArchivoNewMigrationService.migrateArchivos(
                 archivoIds,
-                { type: 'Ticket', id: ticketLocal.id }
+                ticketLocal
             );
 
             this.logger.log(
@@ -359,7 +363,7 @@ export class GestionCobancMigrationService {
 
             // Migrar comentarios asociados al ticket usando el namespace de Cobanc y la entidad local
             const comentariosMigrados = await this.cobancComentarioMigrationService.migrateComentariosByCommentable(
-                'App\\Sistema\\TicketNew\\TicketNew',
+                'App\\Sistema\\TicketNew\\TicketNewComentario',
                 ticketCobancId,
                 ticketLocal, // Pasar el ticket local que tiene getKey() y getType()
             );
@@ -374,10 +378,7 @@ export class GestionCobancMigrationService {
             // Migrar archivos asociados a cada comentario
             for (const comentario of comentariosMigrados) {
                 try {
-                    // Si el comentario original tenía archivo asociado, migrarlo
-                    if (comentario.comentario_cobanc_id) {
-                        await this.migrateComentarioArchivo(comentario.comentario_cobanc_id, comentario);
-                    }
+                    await this.migrateComentarioArchivo(comentario);
 
                     this.logger.debug(`✅ Comentario ID ${comentario.id} procesado correctamente`);
                 } catch (error) {
@@ -401,48 +402,54 @@ export class GestionCobancMigrationService {
     /**
      * Migra el archivo asociado a un comentario de Cobanc.
      * 
-     * @param comentarioCobancId ID del comentario en Cobanc
      * @param comentarioLocal Comentario local al que se asociará el archivo
      * @returns Promise<void>
      */
-    private async migrateComentarioArchivo(comentarioCobancId: number, comentarioLocal: any): Promise<void> {
+    private async migrateComentarioArchivo(comentarioLocal: any): Promise<void> {
         try {
             if (!this.tblArchivosNewRepository) {
                 this.logger.warn(`⚠️ Repositorio de TblArchivosNew no disponible. Omitiendo migración de archivo del comentario.`);
                 return;
             }
 
-            // Buscar archivo asociado al comentario en Cobanc
-            // Los archivos de comentarios usan archivable_type = 'App\\Sistema\\ComentarioTicketNew\\ComentarioTicketNew'
-            const archivoCobanc = await this.tblArchivosNewRepository.findOne({
+             // Buscar todos los archivos asociados al ticket en Cobanc
+            const archivosComentario = await this.tblArchivosNewRepository.find({
                 where: {
-                    archivable_id: comentarioCobancId,
-                    archivable_type: 'App\\Sistema\\ComentarioTicketNew\\ComentarioTicketNew'
+                    archivable_id: comentarioLocal.comentario_cobanc_id,
+                    archivable_type: 'App\\Sistema\\TicketNew\\TicketNewComentario'
                 }
             });
 
-            if (!archivoCobanc) {
-                this.logger.debug(`📎 No se encontró archivo para el comentario Cobanc ID: ${comentarioCobancId}`);
+
+            if (!archivosComentario || archivosComentario.length === 0) {
+                this.logger.debug(`📎 No se encontró archivos para el comentario Cobanc ID: ${comentarioLocal.comentario_cobanc_id}`);
                 return;
             }
 
-            this.logger.log(`📎 Migrando archivo del comentario Cobanc ID: ${comentarioCobancId}`);
+            this.logger.log(`📎 Migrando archivos del comentario Cobanc ID: ${comentarioLocal.comentario_cobanc_id}`);
+            
+            // Migrar los archivos asociándolos al comentario local
+            for (const archivoCobanc of archivosComentario) {
+                const archivoMigrado = await this.cobancArchivoNewMigrationService.migrateArchivoById(
+                    archivoCobanc.id,
+                    comentarioLocal
+                );
 
-            // Migrar el archivo asociándolo al comentario local
-            const result = await this.cobancArchivoNewMigrationService.migrateArchivos(
-                [archivoCobanc.id],
-                { type: 'Comentario', id: comentarioLocal.id }
-            );
-
-            this.logger.log(
-                `✅ Archivo del comentario migrado: ${result.migrated}, omitidos: ${result.skipped}, errores: ${result.errors}`
-            );
+                if (archivoMigrado) {
+                    this.logger.debug(
+                        `✅ Archivo ID: ${archivoMigrado.id} migrado y asociado al comentario ID: ${comentarioLocal.id}`
+                    );
+                } else {
+                    this.logger.warn(
+                        `⚠️ Archivo Cobanc ID: ${archivoCobanc.id} no migrado para el comentario ID: ${comentarioLocal.id}`
+                    );
+                }
+            }
         } catch (error) {
             this.logger.error(
-                `❌ Error migrando archivo del comentario Cobanc ID: ${comentarioCobancId}`,
+                `❌ Error migrando archivo del comentario Cobanc ID: ${comentarioLocal.comentario_cobanc_id}`,
                 error.message
             );
-            // No lanzar error para no interrumpir la migración
         }
     }
 

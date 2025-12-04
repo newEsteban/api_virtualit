@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsInt, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsString, IsInt, MaxLength, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 
 /**

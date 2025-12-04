@@ -89,7 +89,7 @@ export class CobancComentarioMigrationService {
                 commentable_id: commentableId as number,
                 commentable_type: commentableType,
                 comentario_cobanc_id: comentarioCobanc.id,
-                usuario_nombre: usuarioNombre,
+                usuario_nombre: usuarioNombre
             });
 
             const savedComentario = await this.comentarioRepository.save(comentarioLocal);

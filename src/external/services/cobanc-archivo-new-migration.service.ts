@@ -5,6 +5,7 @@ import { In, Repository } from "typeorm";
 import { TblArchivosNew } from "../entities/tbl-archivos-new.entity";
 import { ArchivoService } from "../../archivo/archivo.service";
 import { Archivo } from "../../archivo/entities/archivo.entity";
+import { CreateArchivoDto } from "../../archivo/dto/create-archivo.dto";
 import { AssociatedEntity } from "../interfaces/associated-entity.interface";
 import axios from 'axios';
 import * as fs from 'fs';
@@ -200,9 +201,20 @@ export class CobancArchivoNewMigrationService {
         this.logger.log(`✅ Archivo verificado exitosamente en storage`);
 
         // 6. Crear entidad Archivo en la base de datos local
-        const createArchivoDto = {
-            archivable_type: associatedEntity?.type ?? archivoCobanc.archivable_type,
-            archivable_id: associatedEntity?.id ?? archivoCobanc.archivable_id,
+        if (!associatedEntity) {
+            throw new Error('associatedEntity es requerido para crear un archivo');
+        }
+
+        const archivableType = associatedEntity.getType();
+        const archivableId = associatedEntity.getKey();
+
+        if (!archivableType || !archivableId) {
+            throw new Error('La entidad asociada debe tener un tipo y un ID válidos');
+        }
+
+        const createArchivoDto: CreateArchivoDto = {
+            archivable_type: archivableType,
+            archivable_id: archivableId as number,
             route: relativePath, // Ruta relativa en el storage local
             display_name: archivoCobanc.display_name,
             extension: extension,
